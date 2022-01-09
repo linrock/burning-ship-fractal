@@ -1,4 +1,4 @@
-const max_iterations = 100;
+const max_iterations = 255;
 
 // let x_range = [-1.88, -1.7];
 // const midpoint = [0.45, 0.5];
@@ -65,6 +65,13 @@ function drawCanvases() {
 
   const canvas3 = document.getElementById('bsf-3');
   drawBurningShipFractal(canvas3,
+    [-1.8, -1.7],
+    [-0.08, 0.01],
+    (iteration) => [0, 0, 0, iteration],
+  );
+
+  const canvasWide = document.getElementById('bsf-wide');
+  drawBurningShipFractal(canvasWide,
     [-2.0, -1.5],
     [-0.09, 0.02],
     (iteration) => [
@@ -76,11 +83,11 @@ function drawCanvases() {
   );
 
   canvas1.addEventListener('mousedown', (event) => {
-    console.log('canvas mousedown');
+    console.log(`canvas mousedown - ${event.offsetX}, ${event.offsetY}`);
     console.dir(event);
   });
   canvas1.addEventListener('mouseup', (event) => {
-    console.log('canvas mouseup');
+    console.log(`canvas mouseup - ${event.offsetX}, ${event.offsetY}`);
     console.dir(event);
   });
 }
