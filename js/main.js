@@ -1,4 +1,5 @@
-const max_iterations = 255;
+const MAX_ITERATIONS = 255;
+const ESCAPE_THRESHOLD = 4;
 
 class BurningShipFractalCanvas {
   canvas;
@@ -56,7 +57,7 @@ class BurningShipFractalCanvas {
         let x = 0;
         let y = 0;
         let iteration = 0;
-        while ((x * x + y * y < 4) && (iteration < max_iterations)) {
+        while ((x * x + y * y < ESCAPE_THRESHOLD) && (iteration < MAX_ITERATIONS)) {
           const x_n = x * x - y * y + x0;
           const y_n = 2 * Math.abs(x * y) + y0;
           x = x_n;
@@ -64,7 +65,7 @@ class BurningShipFractalCanvas {
           iteration++;
         }
         const ind = i * this.canvasWidth * 4 + j * 4;
-        const pixels = this.colorFunc(iteration);
+        const pixels = this.colorFunc(iteration, x * x + y * y);
         for (let p = 0; p < 4; p++) {
           image[ind + p] = pixels[p];
         }
@@ -74,18 +75,10 @@ class BurningShipFractalCanvas {
   }
 }
 
-// let x_range = [-1.88, -1.7];
-// const midpoint = [0.45, 0.5];
-// const range = 1.7;
-// x_range = [midpoint[0] - 2 * range, midpoint[0] +  range];
-// y_range = [midpoint[1] - 2 * range, midpoint[1] +  range];
-
-
 function drawCanvases() {
   // console.log(`${JSON.stringify(x_range)} ${JSON.stringify(y_range)}`);
 
-  new BurningShipFractalCanvas(
-    'bsf-1', 
+  new BurningShipFractalCanvas('bsf-1',
     [-1.8, -1.7],
     [-0.08, 0.01],
     (iteration) => [
@@ -96,8 +89,7 @@ function drawCanvases() {
     ]
   ).render();
 
-  new BurningShipFractalCanvas(
-    'bsf-2',
+  new BurningShipFractalCanvas('bsf-2',
     [-1.8, -1.7],
     [-0.08, 0.01],
     (iteration) => [
@@ -108,22 +100,19 @@ function drawCanvases() {
     ]
   ).render();
 
-  new BurningShipFractalCanvas(
-    'bsf-3',
+  new BurningShipFractalCanvas('bsf-3',
     [-1.8, -1.7],
     [-0.08, 0.01],
     (iteration) => [0, 0, 0, iteration],
   ).render();
 
-  new BurningShipFractalCanvas(
-    'bsf-large',
+  new BurningShipFractalCanvas('bsf-large',
     [-2.5, 1.5],
     [-2, 1],
     (iteration) => [0, 0, 0, iteration],
   ).render();
 
-  new BurningShipFractalCanvas(
-    'bsf-wide',
+  new BurningShipFractalCanvas('bsf-wide',
     [-2.0, -1.5],
     [-0.09, 0.02],
     (iteration) => [
@@ -134,19 +123,24 @@ function drawCanvases() {
     ]
   ).render();
 
-
-  new BurningShipFractalCanvas(
-    'bsf-4',
+  new BurningShipFractalCanvas('bsf-4',
     [-1.5805236523437498, -1.5633281499511718],
     [-0.040546444444444434, 0.00574589037037037],
-    (iteration) => [0, 0, 0, iteration],
+    (iteration, modulusSq) => {
+      // http://linas.org/art-gallery/escape/escape.html
+      const mu = iteration - (Math.log(Math.log(Math.sqrt(modulusSq)))) / Math.log(2.0);
+      return [0, 0, 0, 255 - ~~mu];
+    },
   ).render();
 
-  new BurningShipFractalCanvas(
-    'bsf-5',
+  new BurningShipFractalCanvas('bsf-5',
     [-1.9484936376953126, -1.9274103762329102],
     [-0.009537646015624995, 0.0022484190718750014],
-    (iteration) => [0, 0, 0, iteration],
+    (iteration, modulusSq) => {
+      // http://linas.org/art-gallery/escape/escape.html
+      const mu = iteration - (Math.log(Math.log(Math.sqrt(modulusSq)))) / Math.log(2.0);
+      return [0, 0, 0, 255 - ~~mu];
+    },
   ).render();
 }
 
