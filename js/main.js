@@ -1,6 +1,7 @@
 const max_iterations = 100;
-const x_range = [-1.8, -1.7];
-const y_range = [-0.08, 0.01];
+
+let x_range = [-1.8, -1.7];
+let y_range = [-0.08, 0.01];
 
 function drawBurningShipFractal(canvas, drawFunc) {
   const context = canvas.getContext('2d');
@@ -29,8 +30,9 @@ function drawBurningShipFractal(canvas, drawFunc) {
 	context.putImageData(canvas_image_data, 0, 0);
 }
 
+function drawCanvases() {
+  console.log(`${JSON.stringify(x_range)} ${JSON.stringify(y_range)}`);
 
-{
   const canvas1 = document.getElementById('bsf-1');
 	drawBurningShipFractal(canvas1, (image, ind, iteration) => {
     image[ind + 0] = 25 + iteration * 30;
@@ -48,4 +50,17 @@ function drawBurningShipFractal(canvas, drawFunc) {
     image[ind + 3] = 255;
     return image;
   });
+}
+
+{
+  document.querySelector("#update").onclick = () => {
+    console.log('clicked button');
+    x_range[0] = Number(document.querySelector('#x_range_0').value);
+    x_range[1] = Number(document.querySelector('#x_range_1').value);
+    y_range[0] = Number(document.querySelector('#y_range_0').value);
+    y_range[1] = Number(document.querySelector('#y_range_1').value);
+    drawCanvases();
+  };
+
+  drawCanvases();
 }
