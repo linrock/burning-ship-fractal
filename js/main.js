@@ -20,8 +20,8 @@ function drawBurningShipFractal(canvas, x_range, y_range, drawFunc) {
 			let y = 0;
 			let iteration = 0;
 			while ((x * x + y * y < 4) && (iteration < max_iterations)) {
-				let x_n = x * x - y * y + x0;
-				let y_n = 2 * Math.abs(x * y) + y0;
+				const x_n = x * x - y * y + x0;
+				const y_n = 2 * Math.abs(x * y) + y0;
 				x = x_n;
 				y = y_n;
 				iteration++;
@@ -50,9 +50,16 @@ function drawCanvases() {
       255,
     ]
   );
+  canvas1.addEventListener('mousedown', (event) => {
+    console.log(`canvas mousedown - ${event.offsetX}, ${event.offsetY}`);
+    console.dir(event);
+  });
+  canvas1.addEventListener('mouseup', (event) => {
+    console.log(`canvas mouseup - ${event.offsetX}, ${event.offsetY}`);
+    console.dir(event);
+  });
 
-  const canvas2 = document.getElementById('bsf-2');
-  drawBurningShipFractal(canvas2,
+  drawBurningShipFractal(document.getElementById('bsf-2'),
     [-1.8, -1.7],
     [-0.08, 0.01],
     (iteration) => [
@@ -63,15 +70,19 @@ function drawCanvases() {
     ]
   );
 
-  const canvas3 = document.getElementById('bsf-3');
-  drawBurningShipFractal(canvas3,
+  drawBurningShipFractal(document.getElementById('bsf-3'),
     [-1.8, -1.7],
     [-0.08, 0.01],
     (iteration) => [0, 0, 0, iteration],
   );
 
-  const canvasWide = document.getElementById('bsf-wide');
-  drawBurningShipFractal(canvasWide,
+  drawBurningShipFractal(document.getElementById('bsf-large'),
+    [-2.5, 1.5],
+    [-2, 1],
+    (iteration) => [0, 0, 0, iteration],
+  );
+
+  drawBurningShipFractal(document.getElementById('bsf-wide'),
     [-2.0, -1.5],
     [-0.09, 0.02],
     (iteration) => [
@@ -81,15 +92,6 @@ function drawCanvases() {
       255,
     ]
   );
-
-  canvas1.addEventListener('mousedown', (event) => {
-    console.log(`canvas mousedown - ${event.offsetX}, ${event.offsetY}`);
-    console.dir(event);
-  });
-  canvas1.addEventListener('mouseup', (event) => {
-    console.log(`canvas mouseup - ${event.offsetX}, ${event.offsetY}`);
-    console.dir(event);
-  });
 }
 
 {
