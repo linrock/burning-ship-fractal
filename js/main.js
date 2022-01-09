@@ -24,32 +24,33 @@ function drawBurningShipFractal(canvas, drawFunc) {
 				iteration++;
 			}
       const ind = i * canvas_width * 4 + j * 4;
-      drawFunc(image, ind, iteration);
+      const pixels = drawFunc(iteration);
+      for (let p = 0; p < 4; p++) {
+        image[ind + p] = pixels[p];
+      }
 		}
 	}
 	context.putImageData(canvas_image_data, 0, 0);
 }
 
 function drawCanvases() {
-  console.log(`${JSON.stringify(x_range)} ${JSON.stringify(y_range)}`);
+  // console.log(`${JSON.stringify(x_range)} ${JSON.stringify(y_range)}`);
 
   const canvas1 = document.getElementById('bsf-1');
-	drawBurningShipFractal(canvas1, (image, ind, iteration) => {
-    image[ind + 0] = 25 + iteration * 30;
-    image[ind + 1] = 25 + iteration * 10;
-    image[ind + 2] = 85 - iteration * 5;
-		image[ind + 3] = 255;
-    return image;
-  });
+	drawBurningShipFractal(canvas1, (iteration) => [
+    25 + iteration * 30,
+    25 + iteration * 10,
+    85 - iteration * 5,
+		255,
+  ]);
 
   const canvas2 = document.getElementById('bsf-2');
-	drawBurningShipFractal(canvas2, (image, ind, iteration) => {
-    image[ind + 0] = Math.sin(0.016 * iteration + 4) * 230 + 25;
-    image[ind + 1] = Math.sin(0.013 * iteration + 2) * 230 + 25;
-    image[ind + 2] = Math.sin(0.01 * iteration + 1) * 230 + 25;
-    image[ind + 3] = 255;
-    return image;
-  });
+	drawBurningShipFractal(canvas2, (iteration) => [
+    Math.sin(0.016 * iteration + 4) * 230 + 25,
+    Math.sin(0.013 * iteration + 2) * 230 + 25,
+    Math.sin(0.01 * iteration + 1) * 230 + 25,
+    255,
+  ]);
 }
 
 {
