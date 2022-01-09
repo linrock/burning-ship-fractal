@@ -1,4 +1,6 @@
 const max_iterations = 100;
+const x_range = [-1.8, -1.7];
+const y_range = [-0.08, 0.01];
 
 function drawBurningShipFractal(canvas, drawFunc) {
   const context = canvas.getContext('2d');
@@ -8,8 +10,8 @@ function drawBurningShipFractal(canvas, drawFunc) {
   const canvas_width = canvas.width;
 	for (let i = 0; i < canvas_height; i++) {
 		for (let j = 0; j < canvas_width; j++) {
-			const x0 = -1.80 + j * (-1.7 + 1.80) / canvas_width;
-			const y0 = -0.08 + i * (0.01 + 0.08) / canvas_height;
+			const x0 = x_range[0] + j * (x_range[1] - x_range[0]) / canvas_width;
+			const y0 = y_range[0] + i * (y_range[1] - y_range[0]) / canvas_height;
 			let x = 0;
 			let y = 0;
 			let iteration = 0;
