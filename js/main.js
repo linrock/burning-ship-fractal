@@ -24,7 +24,7 @@ class BurningShipFractalCanvas {
       const y0 =
         this.yRange[0] * (1 - event.offsetY / this.canvasHeight) +
         this.yRange[1] * (event.offsetY / this.canvasHeight);
-      console.log(`(${x0}, ${y0})`);
+      // console.log(`(${x0}, ${y0})`);
       this.xRange[0] = x0;
       this.yRange[0] = y0;
     });
@@ -44,6 +44,8 @@ class BurningShipFractalCanvas {
   }
 
   render() {
+    console.log(`xRange: ${this.xRange}`);
+    console.log(`yRange: ${this.yRange}`);
     const context = this.canvas.getContext('2d');
     const canvasImageData = context.createImageData(this.canvasWidth, this.canvasHeight);
     const image = canvasImageData.data;
@@ -130,6 +132,21 @@ function drawCanvases() {
       Math.sin(0.01 * iteration + 1) * 230 + 25,
       255,
     ]
+  ).render();
+
+
+  new BurningShipFractalCanvas(
+    'bsf-4',
+    [-1.5805236523437498, -1.5633281499511718],
+    [-0.040546444444444434, 0.00574589037037037],
+    (iteration) => [0, 0, 0, iteration],
+  ).render();
+
+  new BurningShipFractalCanvas(
+    'bsf-5',
+    [-1.9484936376953126, -1.9274103762329102],
+    [-0.009537646015624995, 0.0022484190718750014],
+    (iteration) => [0, 0, 0, iteration],
   ).render();
 }
 
