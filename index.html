@@ -13,8 +13,12 @@
       width: 800px;
       margin: 0 auto;
     }
+    input[type="text"] {
+      font-size: 1rem;
+      width: 5rem;
+    }
     button {
-      padding: 8px 16px;
+      padding: 0.5rem 1rem;
       font-size: 1rem;
     }
     button:hover {
@@ -34,14 +38,17 @@
     <header>
       <h1>Burning ship fractal</h1>
     </header>
-    <canvas id="bsf-1" width="800" height="800"></canvas>
-    <input id="x_range_0" type="text" value="-1.8" />
-    <input id="x_range_1" type="text" value="-1.7" />
+    <canvas id="bsf-1" width="800" height="800"
+            style="width: 600px; height: 600px"></canvas>
+    <div>
+      <input id="x_range_0" type="text" value="-1.8" />
+      <input id="x_range_1" type="text" value="-1.7" />
 
-    <input id="y_range_0" type="text" value="-0.08" />
-    <input id="y_range_1" type="text" value="0.01" />
+      <input id="y_range_0" type="text" value="-0.08" />
+      <input id="y_range_1" type="text" value="0.01" />
 
-    <button id="update">Update</button>
+      <button id="update">Update</button>
+    </div>
 
     <canvas id="bsf-2" width="800" height="800"></canvas>
     <canvas id="bsf-3" width="800" height="800" style="background: grey"></canvas>
