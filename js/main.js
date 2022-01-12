@@ -86,6 +86,9 @@ function drawCanvases() {
     [-2.0, -1.5],
     [-0.09, 0.02],
     (iteration, modulusSq) => {
+      if (iteration === MAX_ITERATIONS) {
+        return [0, 0, 0, 255];
+      }
       const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
       return [
         25 + mu * 30,
@@ -101,6 +104,9 @@ function drawCanvases() {
     [-1.8, -1.7],
     [-0.08, 0.01],
     (iteration, modulusSq) => {
+      if (iteration === MAX_ITERATIONS) {
+        return [0, 0, 0, 255];
+      }
       // https://mathr.co.uk/helm/AtTheHelmOfTheBurningShip-Paper.pdf
       const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
       return [
@@ -116,12 +122,17 @@ function drawCanvases() {
   new BurningShipFractalCanvas('bsf-2',
     [-1.8, -1.7],
     [-0.08, 0.01],
-    (iteration) => [
-      25 + iteration * 30,
-      25 + iteration * 10,
-      85 - iteration * 5,
-      255,
-    ]
+    (iteration, modulusSq) => {
+      if (iteration === MAX_ITERATIONS) {
+        return [0, 0, 0, 255];
+      }
+      return [
+        25 + iteration * 30,
+        25 + iteration * 10,
+        85 - iteration * 5,
+        255,
+      ];
+    }
   ).render();
 
   // colored with the iteration count as the alpha channel
@@ -131,11 +142,14 @@ function drawCanvases() {
     (iteration) => [0, 0, 0, iteration],
   ).render();
 
-  // colored with the iteration count as the alpha channel
+  // zoomed-out view
   new BurningShipFractalCanvas('bsf-large',
     [-2.5, 1.5],
     [-2, 1],
     (iteration, modulusSq) => {
+      if (iteration === MAX_ITERATIONS) {
+        return [0, 0, 0, 255];
+      }
       // const mu = iteration - (Math.log(Math.log(Math.sqrt(modulusSq)))) / Math.log(2.0);
       const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
       return [
@@ -147,10 +161,14 @@ function drawCanvases() {
     }
   ).render();
 
+  // zoomed into one of the smaller ships
   new BurningShipFractalCanvas('bsf-4',
     [-1.5805236523437498, -1.5633281499511718],
     [-0.040546444444444434, 0.00574589037037037],
     (iteration, modulusSq) => {
+      if (iteration === MAX_ITERATIONS) {
+        return [0, 0, 0, 255];
+      }
       // http://linas.org/art-gallery/escape/escape.html
       const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
       return [0, 0, 0, 255 - ~~mu];
@@ -161,6 +179,9 @@ function drawCanvases() {
     [-1.9484936376953126, -1.9274103762329102],
     [-0.009537646015624995, 0.0022484190718750014],
     (iteration, modulusSq) => {
+      if (iteration === MAX_ITERATIONS) {
+        return [0, 0, 0, 255];
+      }
       // http://linas.org/art-gallery/escape/escape.html
       const mu = iteration - (Math.log(Math.log(Math.sqrt(modulusSq)))) / Math.log(2.0);
       return [
