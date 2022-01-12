@@ -1,6 +1,21 @@
 const MAX_ITERATIONS = 255;
 const ESCAPE_THRESHOLD = 4;
 
+/** Until escape or exceeding the max # of iterations */
+function iterateUntilEscape(x0, y0) {
+  let x = 0;
+  let y = 0;
+  let iteration = 0;
+  while ((x * x + y * y < ESCAPE_THRESHOLD) && (iteration < MAX_ITERATIONS)) {
+    const x_n = x * x - y * y + x0;
+    const y_n = 2 * Math.abs(x * y) + y0;
+    x = x_n;
+    y = y_n;
+    iteration++;
+  }
+  return [iteration, x * x + y * y];
+}
+
 class BurningShipFractalCanvas {
   canvas;
   canvasWidth;
@@ -54,18 +69,9 @@ class BurningShipFractalCanvas {
       for (let j = 0; j < this.canvasWidth; j++) {
         const x0 = this.xRange[0] + j * (this.xRange[1] - this.xRange[0]) / this.canvasWidth;
         const y0 = this.yRange[0] + i * (this.yRange[1] - this.yRange[0]) / this.canvasHeight;
-        let x = 0;
-        let y = 0;
-        let iteration = 0;
-        while ((x * x + y * y < ESCAPE_THRESHOLD) && (iteration < MAX_ITERATIONS)) {
-          const x_n = x * x - y * y + x0;
-          const y_n = 2 * Math.abs(x * y) + y0;
-          x = x_n;
-          y = y_n;
-          iteration++;
-        }
+        const [numIterations, escapeDistSq] = iterateUntilEscape(x0, y0);
         const ind = i * this.canvasWidth * 4 + j * 4;
-        const pixels = this.colorFunc(iteration, x * x + y * y);
+        const pixels = this.colorFunc(numIterations, escapeDistSq);
         for (let p = 0; p < 4; p++) {
           image[ind + p] = pixels[p];
         }

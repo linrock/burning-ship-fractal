@@ -27,6 +27,10 @@
     canvas {
       border: 0;
     }
+    pre {
+      background: #121212;
+      color: #e0e0e0;
+    }
     footer {
       height: 10rem;
     }
@@ -55,6 +59,19 @@
     <canvas id="bsf-large" width="800" height="600" style="background: orange"></canvas>
     <canvas id="bsf-4" width="800" height="800" style="background: orange"></canvas>
     <canvas id="bsf-5" width="800" height="800" style="background: orange"></canvas>
+
+    <pre>
+      let x = 0;
+      let y = 0;
+      let iteration = 0;
+      while ((x * x + y * y < ESCAPE_THRESHOLD) && (iteration < MAX_ITERATIONS)) {
+        const x_n = x * x - y * y + x0;
+        const y_n = 2 * Math.abs(x * y) + y0;
+        x = x_n;
+        y = y_n;
+        iteration++;
+      }
+    </pre>
 
     <footer></footer>
   </div>
