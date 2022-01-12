@@ -82,8 +82,19 @@ class BurningShipFractalCanvas {
 }
 
 function drawCanvases() {
-  // console.log(`${JSON.stringify(x_range)} ${JSON.stringify(y_range)}`);
+  // thin and wide at the top of the page
+  new BurningShipFractalCanvas('bsf-wide',
+    [-2.0, -1.5],
+    [-0.09, 0.02],
+    (iteration) => [
+      Math.sin(0.016 * iteration + 4) * 230 + 25,
+      Math.sin(0.013 * iteration + 2) * 230 + 25,
+      Math.sin(0.01 * iteration + 1) * 230 + 25,
+      255,
+    ]
+  ).render();
 
+  // bright orange and yellow one
   new BurningShipFractalCanvas('bsf-1',
     [-1.8, -1.7],
     [-0.08, 0.01],
@@ -98,6 +109,21 @@ function drawCanvases() {
   new BurningShipFractalCanvas('bsf-2',
     [-1.8, -1.7],
     [-0.08, 0.01],
+    (iteration, modulusSq) => {
+      const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
+      return [
+        25 + mu * 30,
+        25 + mu * 10,
+        85 - mu * 5,
+        255,
+      ];
+    }
+  ).render();
+
+  /*
+  new BurningShipFractalCanvas('bsf-2',
+    [-1.8, -1.7],
+    [-0.08, 0.01],
     (iteration) => [
       Math.sin(0.016 * iteration + 4) * 230 + 25,
       Math.sin(0.013 * iteration + 2) * 230 + 25,
@@ -105,6 +131,7 @@ function drawCanvases() {
       255,
     ]
   ).render();
+  */
 
   new BurningShipFractalCanvas('bsf-3',
     [-1.8, -1.7],
@@ -116,17 +143,6 @@ function drawCanvases() {
     [-2.5, 1.5],
     [-2, 1],
     (iteration) => [0, 0, 0, iteration],
-  ).render();
-
-  new BurningShipFractalCanvas('bsf-wide',
-    [-2.0, -1.5],
-    [-0.09, 0.02],
-    (iteration) => [
-      Math.sin(0.016 * iteration + 4) * 230 + 25,
-      Math.sin(0.013 * iteration + 2) * 230 + 25,
-      Math.sin(0.01 * iteration + 1) * 230 + 25,
-      255,
-    ]
   ).render();
 
   new BurningShipFractalCanvas('bsf-4',
