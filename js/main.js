@@ -97,22 +97,12 @@ function drawCanvases() {
     }
   ).render();
 
-  // bright orange and yellow one
+  // black ship, orange background, yellow flames
   new BurningShipFractalCanvas('bsf-1',
     [-1.8, -1.7],
     [-0.08, 0.01],
-    (iteration) => [
-      25 + iteration * 30,
-      25 + iteration * 10,
-      85 - iteration * 5,
-      255,
-    ]
-  ).render();
-
-  new BurningShipFractalCanvas('bsf-2',
-    [-1.8, -1.7],
-    [-0.08, 0.01],
     (iteration, modulusSq) => {
+      // https://mathr.co.uk/helm/AtTheHelmOfTheBurningShip-Paper.pdf
       const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
       return [
         25 + mu * 30,
@@ -123,16 +113,39 @@ function drawCanvases() {
     }
   ).render();
 
+  // bright orange and yellow one
+  new BurningShipFractalCanvas('bsf-2',
+    [-1.8, -1.7],
+    [-0.08, 0.01],
+    (iteration) => [
+      25 + iteration * 30,
+      25 + iteration * 10,
+      85 - iteration * 5,
+      255,
+    ]
+  ).render();
+
+  // colored with the iteration count as the alpha channel
   new BurningShipFractalCanvas('bsf-3',
     [-1.8, -1.7],
     [-0.08, 0.01],
     (iteration) => [0, 0, 0, iteration],
   ).render();
 
+  // colored with the iteration count as the alpha channel
   new BurningShipFractalCanvas('bsf-large',
     [-2.5, 1.5],
     [-2, 1],
-    (iteration) => [0, 0, 0, iteration],
+    (iteration, modulusSq) => {
+      // const mu = iteration - (Math.log(Math.log(Math.sqrt(modulusSq)))) / Math.log(2.0);
+      const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
+      return [
+        25 + mu * 30,
+        25 + mu * 10,
+        85 - mu * 5,
+        255,
+      ];
+    }
   ).render();
 
   new BurningShipFractalCanvas('bsf-4',
@@ -140,7 +153,7 @@ function drawCanvases() {
     [-0.040546444444444434, 0.00574589037037037],
     (iteration, modulusSq) => {
       // http://linas.org/art-gallery/escape/escape.html
-      const mu = iteration - (Math.log(Math.log(Math.sqrt(modulusSq)))) / Math.log(2.0);
+      const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
       return [0, 0, 0, 255 - ~~mu];
     },
   ).render();
@@ -151,7 +164,12 @@ function drawCanvases() {
     (iteration, modulusSq) => {
       // http://linas.org/art-gallery/escape/escape.html
       const mu = iteration - (Math.log(Math.log(Math.sqrt(modulusSq)))) / Math.log(2.0);
-      return [0, 0, 0, 255 - ~~mu];
+      return [
+        25 + mu * 30,
+        25 + mu * 10,
+        85 - mu * 5,
+        255,
+      ];
     },
   ).render();
 }

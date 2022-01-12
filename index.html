@@ -5,6 +5,7 @@
   <style>
     body {
       background: #222;
+      color: #eee;
     }
     h1 {
       color: #fafafa;
@@ -46,8 +47,9 @@
       <pre>Z_n+1 = (|Z_re| + i|Z_im|)^2 + c</pre>
     </header>
 
+    <p>Colored with renormalized iteration counts</p>
     <canvas id="bsf-1" width="800" height="800"></canvas>
-    <div>
+    <div style="display: none">
       <input id="x_range_0" type="text" value="-1.8" />
       <input id="x_range_1" type="text" value="-1.7" />
 
@@ -57,10 +59,12 @@
       <button id="update">Update</button>
     </div>
 
+    <p>Colored based on iteration count alone</p>
     <canvas id="bsf-2" width="800" height="800"></canvas>
+
     <canvas id="bsf-3" width="800" height="800" style="background: orange"></canvas>
     <canvas id="bsf-large" width="800" height="600" style="background: orange"></canvas>
-    <canvas id="bsf-4" width="800" height="800" style="background: orange"></canvas>
+    <canvas id="bsf-4" width="800" height="1200" style="background: orange"></canvas>
     <canvas id="bsf-5" width="800" height="800" style="background: orange"></canvas>
 
     <pre>
