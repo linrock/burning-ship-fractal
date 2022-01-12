@@ -53,6 +53,9 @@ pre {
   padding: 1rem;
   border-radius: 3px;
 }
+section {
+  margin: 3rem 0;
+}
 footer {
   padding: 2rem 0;
 }
