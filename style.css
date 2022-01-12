@@ -54,7 +54,7 @@ pre {
   border-radius: 3px;
 }
 footer {
-  height: 10rem;
+  padding: 2rem 0;
 }
 
 @media screen and (max-width: 800px) {

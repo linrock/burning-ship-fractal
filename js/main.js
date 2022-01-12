@@ -3,8 +3,7 @@ const ESCAPE_THRESHOLD = 4;
 
 /** Until escape or exceeding the max # of iterations */
 function iterateUntilEscape(x0, y0) {
-  let x = 0;
-  let y = 0;
+  let x = 0, y = 0;
   let iteration = 0;
   while ((x * x + y * y < ESCAPE_THRESHOLD) && (iteration < MAX_ITERATIONS)) {
     const x_n = x * x - y * y + x0;

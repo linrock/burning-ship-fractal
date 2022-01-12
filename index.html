@@ -21,8 +21,8 @@
       <p>
         Fractal colors are decided by:
         <ul>
-          <li>counting the number of iterations until reaching the escape radius</li>
-          <li>considering the magnitude of the escape</li>
+          <li>the number of iterations until reaching the escape radius</li>
+          <li>the magnitude of the escape</li>
         </ul>
       </p>
     </div>
@@ -55,7 +55,7 @@
             style="background: orange"></canvas>
 
     <p>Another one of the smaller ships</p>
-    <canvas id="bsf-5" width="800" height="800"
+    <canvas id="bsf-5" width="800" height="400"
             style="background: orange"></canvas>
 
     <p>The number of iterations is determined by this equation:</p>
@@ -63,15 +63,18 @@
 const ESCAPE_THRESHOLD = 4;
 const MAX_ITERATIONS = 255;
 
-let x = 0;
-let y = 0;
-let iteration = 0;
-while ((x * x + y * y < ESCAPE_THRESHOLD) && (iteration &lt; MAX_ITERATIONS)) {
-  const x_n = x * x - y * y + x0;
-  const y_n = 2 * Math.abs(x * y) + y0;
-  x = x_n;
-  y = y_n;
-  iteration++;
+function iterateUntilEscape(x0, y0) {
+  let x = 0;
+  let y = 0;
+  let iteration = 0;
+  while ((x * x + y * y < ESCAPE_THRESHOLD) && (iteration &lt; MAX_ITERATIONS)) {
+    const x_n = x * x - y * y + x0;
+    const y_n = 2 * Math.abs(x * y) + y0;
+    x = x_n;
+    y = y_n;
+    iteration++;
+  }
+  return [iteration, xSq + ySq];
 }</pre>
   </div>
 
