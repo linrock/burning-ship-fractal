@@ -1,0 +1,43 @@
+body {
+  background: #222;
+  color: #eee;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+header {
+  position: relative;
+}
+h1 {
+  color: #fafafa;
+  position: absolute;
+  margin-left: 2rem;
+}
+.container {
+  width: 800px;
+  margin: 0 auto;
+}
+input[type="text"] {
+  font-size: 1rem;
+  width: 5rem;
+}
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+button:hover {
+  cursor: pointer;
+}
+canvas {
+  border: 0;
+}
+pre {
+  background: #121212;
+  color: #e0e0e0;
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 3px;
+}
+footer {
+  height: 10rem;
+}

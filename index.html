@@ -2,40 +2,7 @@
 <html lang="en">
 <head>
   <title>Burning ship fractal</title>
-  <style>
-    body {
-      background: #222;
-      color: #eee;
-    }
-    h1 {
-      color: #fafafa;
-    }
-    .container {
-      width: 800px;
-      margin: 0 auto;
-    }
-    input[type="text"] {
-      font-size: 1rem;
-      width: 5rem;
-    }
-    button {
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-    }
-    button:hover {
-      cursor: pointer;
-    }
-    canvas {
-      border: 0;
-    }
-    pre {
-      background: #121212;
-      color: #e0e0e0;
-    }
-    footer {
-      height: 10rem;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -44,8 +11,15 @@
       <h1>Burning ship fractal</h1>
       <canvas id="bsf-wide" width="800" height="150"></canvas>
 
-      <pre>Z_n+1 = (|Z_re| + i|Z_im|)^2 + c</pre>
     </header>
+
+    <div>
+      <pre>Z_n+1 = (|Z_re| + i|Z_im|)^2 + (x0, y0)</pre>
+      <p>
+        Fractal colors are decided by counting the number of iterations
+        until the escape radius
+      </p>
+    </div>
 
     <p>Colored with renormalized iteration counts</p>
     <canvas id="bsf-1" width="800" height="800"></canvas>
