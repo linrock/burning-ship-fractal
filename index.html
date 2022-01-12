@@ -19,8 +19,11 @@
     <div>
       <pre>Z_n+1 = (|Z_re| + i|Z_im|)^2 + (x0, y0)</pre>
       <p>
-        Fractal colors are decided by counting the number of iterations
-        until the escape radius
+        Fractal colors are decided by:
+        <ul>
+          <li>counting the number of iterations until reaching the escape radius</li>
+          <li>considering the magnitude of the escape</li>
+        </ul>
       </p>
     </div>
 
@@ -36,29 +39,49 @@
       <button id="update">Update</button>
     </div>
 
-    <p>Colored based on iteration count alone</p>
+    <p>Colored based on iteration count alone, without any smoothing</p>
     <canvas id="bsf-2" width="800" height="800"></canvas>
 
-    <canvas id="bsf-3" width="800" height="800" style="background: orange"></canvas>
-    <canvas id="bsf-large" width="800" height="600" style="background: orange"></canvas>
+    <p>Colored with the iteration count as the alpha channel</p>
+    <canvas id="bsf-3" width="800" height="800" style="background: #ff8400">
+    </canvas>
+
+    <p>The zoomed-out view of the fractal space</p>
+    <canvas id="bsf-large" width="800" height="600" style="background: orange">
+    </canvas>
+
+    <p>Zoomed in to one of the smaller ships</p>
     <canvas id="bsf-4" width="800" height="1200" style="background: orange"></canvas>
+
+    <p>Another one of the smaller ships</p>
     <canvas id="bsf-5" width="800" height="800" style="background: orange"></canvas>
 
+    <p>The number of iterations is determined by this equation:</p>
     <pre>
-      let x = 0;
-      let y = 0;
-      let iteration = 0;
-      while ((x * x + y * y < ESCAPE_THRESHOLD) && (iteration < MAX_ITERATIONS)) {
-        const x_n = x * x - y * y + x0;
-        const y_n = 2 * Math.abs(x * y) + y0;
-        x = x_n;
-        y = y_n;
-        iteration++;
-      }
-    </pre>
+const ESCAPE_THRESHOLD = 4;
+const MAX_ITERATIONS = 255;
 
-    <footer></footer>
+let x = 0;
+let y = 0;
+let iteration = 0;
+while ((x * x + y * y < ESCAPE_THRESHOLD) && (iteration &lt; MAX_ITERATIONS)) {
+  const x_n = x * x - y * y + x0;
+  const y_n = 2 * Math.abs(x * y) + y0;
+  x = x_n;
+  y = y_n;
+  iteration++;
+}</pre>
   </div>
+
+  <footer>
+    <div class="container">
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Burning_Ship_fractal">Wikipedia - Burning Ship fractal</a></li>
+      </ul>
+    </div>
+  </footer>
+
   <script src="js/main.js"></script>
 </body>
 </html>
