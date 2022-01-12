@@ -1,3 +1,9 @@
+html {
+  box-sizing: border-box;
+}
+* {
+  box-sizing: inherit;
+}
 body {
   background: #222;
   color: #eee;
@@ -49,4 +55,17 @@ pre {
 }
 footer {
   height: 10rem;
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    width: 100%;
+  }
+  canvas {
+    width: 100%;
+  }
+  pre {
+    width: 100%;
+    overflow-x: auto;
+  }
 }
