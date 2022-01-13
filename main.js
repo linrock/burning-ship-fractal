@@ -87,58 +87,64 @@ function getMu(iteration, modulusSq) {
   return iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
 }
 
+function renderBsfCanvas(canvasId, xRange, yRange, drawFunc) {
+  new BurningShipFractalCanvas(
+    canvasId, xRange, yRange, drawFunc).render();
+}
+
 function drawCanvases() {
   // thin and wide at the top of the page
-  new BurningShipFractalCanvas('bsf-wide',
+  renderBsfCanvas('bsf-wide',
     [-2.0, -1.5], [-0.09, 0.02],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
       return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
     }
-  ).render();
+  );
 
   // black ship, orange background, yellow flames
-  new BurningShipFractalCanvas('bsf-1',
+  renderBsfCanvas('bsf-1',
     [-1.8, -1.7], [-0.08, 0.01],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
       return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
     }
-  ).render();
+  );
 
   // bright orange and yellow one
-  new BurningShipFractalCanvas('bsf-2',
+  renderBsfCanvas('bsf-2',
     [-1.8, -1.7], [-0.08, 0.01],
     (iteration, modulusSq) => {
       return [ 255, ~~(iteration * 7), 0, ~~(iteration * 15) ];
     }
-  ).render();
+  );
 
   // zoomed-out view
-  new BurningShipFractalCanvas('bsf-large',
+  renderBsfCanvas('bsf-large',
     [-2.5, 1.5], [-2, 1],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
       return [ 25 + mu * 30, 25 + mu * 10, 85 - mu * 5, 255 ];
     }
-  ).render();
+  );
 
   // zoomed into one of the smaller ships
-  new BurningShipFractalCanvas('bsf-4',
+  renderBsfCanvas('bsf-4',
     [-1.5805, -1.563], [-0.0405, 0.0057],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
       return [ 255, ~~(mu * 5), 0, ~~(mu * 12) ];
     },
-  ).render();
+  );
 
-  new BurningShipFractalCanvas('bsf-5',
+  // another one of the smaller ships
+  renderBsfCanvas('bsf-5',
     [-1.948, -1.925], [-0.0095,  0.002],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
       return [ 255, ~~(mu * 12), 0, ~~(mu * 12) ];
     },
-  ).render();
+  );
 }
 
 {
