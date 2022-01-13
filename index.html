@@ -5,8 +5,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Biryani&display=swap"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Space+Grotesk&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -16,8 +15,8 @@
                           height="1000"></canvas>
     <div class="container">
       <figcaption>
-        x [-2.0, -1.5] <br>
-        y [-0.09, 0.02]
+         x [-2.00, -1.5] <br>
+        y [-0.09,  0.02]
       </figcaption>
     </div>
   </header>
@@ -28,13 +27,13 @@
 
     <section>
       <p>
-        We can explore fractals by putting different starting numbers
-        into the equation and making note of:
+        We can explore fractals by putting different starting (x0, y0) numbers
+        into the equation and making note of whether the series:
         <ul>
-          <li>whether the numbers diverge to infinity or stay within a limit</li>
-          <li>if they diverge
+          <li>diverges to infinity or stays within a limit</li>
+          <li>if the series diverges, we can look at:
             <ul>
-              <li> the number of iterations until reaching the escape radius</li>
+              <li>the number of iterations until reaching the escape radius</li>
               <li>the magnitude of the escape</li>
             </ul>
           </li>
@@ -44,20 +43,19 @@
 
     <p>
       Here's the largest ship in the fractal, colored based on
-      iteration count alone, without considering the magnitude
-      of escapes.
+      iteration count alone.
     </p>
     <canvas id="bsf-large-ship-1" width="1600" height="1600"></canvas>
     <figcaption>
-      x [-1.8, -1.7] <br>
-      y [-0.08, 0.01]
+      x [-1.80, -1.7] <br>
+      y [-0.08,  0.01]
     </figcaption>
 
     <p>
       If we consider the magnitude of the escape, the resulting
       image will appear smoother with the same color palette.
       Here's the largest ship colored with renormalized
-      iteration counts
+      iteration counts.
     </p>
     <canvas id="bsf-large-ship-2" width="1600" height="1600"></canvas>
     <figcaption>
@@ -80,7 +78,7 @@
                                     height="600"></canvas>
     <figcaption>
       x [-2.5, 1.5] <br>
-      y [-2, 1]
+      y [-2,   1.0]
     </figcaption>
 
     <p>Zoomed in to one of the smaller ships</p>
@@ -108,7 +106,8 @@ function iterateUntilEscape(x0, y0) {
   let x = 0;
   let y = 0;
   let iteration = 0;
-  while ((x*x + y*y < ESCAPE_THRESHOLD) && (iteration &lt; MAX_ITERATIONS)) {
+  while ((x*x + y*y < ESCAPE_THRESHOLD) &&
+         (iteration &lt; MAX_ITERATIONS)) {
     const x_next = x*x - y*y + x0;
     const y_next = 2*Math.abs(x*y) + y0;
     x = x_next;

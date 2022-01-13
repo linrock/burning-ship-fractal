@@ -6,10 +6,10 @@ html {
 }
 body {
   background: #222;
-  color: #eee;
+  color: #d7d7d7;
   margin: 0;
   padding: 0;
-  font-family: Biryani;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 1rem;
 }
 header {
@@ -22,6 +22,9 @@ footer {
 a {
   color: inherit;
 }
+p, li {
+  line-height: 1.5rem;
+}
 h1 {
   /** color: #fafafa; */
   color: #ffe100;
@@ -29,7 +32,7 @@ h1 {
   margin-left: 2rem;
 }
 .container {
-  width: 800px;
+  width: 600px;
   margin: 0 auto;
 }
 input[type="text"] {
@@ -47,9 +50,13 @@ canvas {
   border: 0;
   max-width: 100%;
 }
+figcaption, pre {
+  font-family: "Fira Mono", monospace;
+}
 figcaption {
   text-align: right;
   opacity: 0.5;
+  margin-bottom: 1.5rem;
 }
 pre {
   background: #121212;
@@ -66,7 +73,7 @@ footer {
   padding: 2rem 0;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
   .container {
     width: 100%;
   }
