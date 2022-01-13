@@ -87,7 +87,7 @@ function drawCanvases() {
     [-0.09, 0.02],
     (iteration, modulusSq) => {
       if (iteration === MAX_ITERATIONS) {
-        return [0, 0, 0, 255];
+        return [200, 70, 5, 255];
       }
       const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
       return [
