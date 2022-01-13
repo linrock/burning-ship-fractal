@@ -88,109 +88,59 @@ function getMu(iteration, modulusSq) {
 function drawCanvases() {
   // thin and wide at the top of the page
   new BurningShipFractalCanvas('bsf-wide',
-    [-2.0, -1.5],
-    [-0.09, 0.02],
+    [-2.0, -1.5], [-0.09, 0.02],
     (iteration, modulusSq) => {
-      if (iteration === MAX_ITERATIONS) {
-        return [200, 70, 5, 255];
-      }
+      if (iteration === MAX_ITERATIONS) return [200, 70, 5, 255];
       const mu = getMu(iteration, modulusSq);
-      return [
-        255,
-        ~~(mu * 7),
-        0,
-        ~~(mu * 15),
-      ];
+      return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
     }
   ).render();
 
   // black ship, orange background, yellow flames
   new BurningShipFractalCanvas('bsf-1',
-    [-1.8, -1.7],
-    [-0.08, 0.01],
+    [-1.8, -1.7], [-0.08, 0.01],
     (iteration, modulusSq) => {
-      if (iteration === MAX_ITERATIONS) {
-        return [0, 0, 0, 255];
-      }
+      if (iteration === MAX_ITERATIONS) return [0, 0, 0, 255];
       const mu = getMu(iteration, modulusSq);
-      return [
-        255,
-        ~~(mu * 7),
-        0,
-        ~~(mu * 15),
-      ];
+      return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
     }
   ).render();
 
   // bright orange and yellow one
   new BurningShipFractalCanvas('bsf-2',
-    [-1.8, -1.7],
-    [-0.08, 0.01],
+    [-1.8, -1.7], [-0.08, 0.01],
     (iteration, modulusSq) => {
-      if (iteration === MAX_ITERATIONS) {
-        return [0, 0, 0, 255];
-      }
-      return [
-        255,
-        ~~(iteration * 7),
-        0,
-        ~~(iteration * 15),
-      ];
+      if (iteration === MAX_ITERATIONS) return [0, 0, 0, 255];
+      return [ 255, ~~(iteration * 7), 0, ~~(iteration * 15) ];
     }
   ).render();
 
   // zoomed-out view
   new BurningShipFractalCanvas('bsf-large',
-    [-2.5, 1.5],
-    [-2, 1],
+    [-2.5, 1.5], [-2, 1],
     (iteration, modulusSq) => {
-      if (iteration === MAX_ITERATIONS) {
-        return [0, 0, 0, 255];
-      }
+      if (iteration === MAX_ITERATIONS) return [0, 0, 0, 255];
       const mu = getMu(iteration, modulusSq);
-      return [
-        25 + mu * 30,
-        25 + mu * 10,
-        85 - mu * 5,
-        255,
-      ];
+      return [ 25 + mu * 30, 25 + mu * 10, 85 - mu * 5, 255 ];
     }
   ).render();
 
   // zoomed into one of the smaller ships
   new BurningShipFractalCanvas('bsf-4',
-    [-1.5805, -1.563],
-    [-0.0405, 0.0057],
+    [-1.5805, -1.563], [-0.0405, 0.0057],
     (iteration, modulusSq) => {
-      if (iteration === MAX_ITERATIONS) {
-        return [0, 0, 0, 255];
-      }
-      // http://linas.org/art-gallery/escape/escape.html
+      if (iteration === MAX_ITERATIONS) return [0, 0, 0, 255];
       const mu = getMu(iteration, modulusSq);
-      return [
-        255,
-        ~~(mu * 5),
-        0,
-        ~~(mu * 12),
-      ];
+      return [ 255, ~~(mu * 5), 0, ~~(mu * 12) ];
     },
   ).render();
 
   new BurningShipFractalCanvas('bsf-5',
-    [-1.948, -1.925],
-    [-0.0095,  0.002],
+    [-1.948, -1.925], [-0.0095,  0.002],
     (iteration, modulusSq) => {
-      if (iteration === MAX_ITERATIONS) {
-        return [0, 0, 0, 255];
-      }
-      // http://linas.org/art-gallery/escape/escape.html
+      if (iteration === MAX_ITERATIONS) return [0, 0, 0, 255];
       const mu = getMu(iteration, modulusSq);
-      return [
-        255,
-        ~~(mu * 12),
-        0,
-        ~~(mu * 12),
-      ];
+      return [ 255, ~~(mu * 12), 0, ~~(mu * 12) ];
     },
   ).render();
 }
