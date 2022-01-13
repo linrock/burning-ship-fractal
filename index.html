@@ -20,13 +20,23 @@
 
     <section>
       <p>
-        Fractal colors are decided by:
+        We can explore fractals by putting different starting numbers
+        into the equation and making note of:
         <ul>
-          <li>the number of iterations until reaching the escape radius</li>
-          <li>the magnitude of the escape</li>
+          <li>whether the numbers diverge to infinity or stay within a limit</li>
+          <li>if they diverge
+            <ul>
+              <li> the number of iterations until reaching the escape radius</li>
+              <li>the magnitude of the escape</li>
+            </ul>
+          </li>
         </ul>
       </p>
     </section>
+
+    <p>Colored based on iteration count alone, without any smoothing</p>
+    <canvas id="bsf-2" width="800" height="800"></canvas>
+    <figcaption>x [-1.8, -1.7] <br>y [-0.08, 0.01]</figcaption>
 
     <p>The largest ship colored with renormalized iteration counts</p>
     <canvas id="bsf-1" width="800" height="800"></canvas>
@@ -41,10 +51,6 @@
 
       <button id="update">Update</button>
     </div>
-
-    <p>Colored based on iteration count alone, without any smoothing</p>
-    <canvas id="bsf-2" width="800" height="800"></canvas>
-    <figcaption>x [-1.8, -1.7] <br>y [-0.08, 0.01]</figcaption>
 
     <p>The zoomed-out view of the fractal space</p>
     <canvas id="bsf-large" width="800" height="600"
