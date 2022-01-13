@@ -96,10 +96,10 @@ function drawCanvases() {
       }
       const mu = getMu(iteration, modulusSq);
       return [
-        25 + mu * 30,
-        25 + mu * 10,
-        85 - mu * 5,
         255,
+        ~~(mu * 7),
+        0,
+        ~~(mu * 15),
       ];
     }
   ).render();
