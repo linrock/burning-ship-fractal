@@ -159,8 +159,8 @@ function drawCanvases() {
 
   // zoomed into one of the smaller ships
   new BurningShipFractalCanvas('bsf-4',
-    [-1.5805236523437498, -1.5633281499511718],
-    [-0.040546444444444434, 0.00574589037037037],
+    [-1.5805, -1.563],
+    [-0.0405, 0.0057],
     (iteration, modulusSq) => {
       if (iteration === MAX_ITERATIONS) {
         return [0, 0, 0, 255];
