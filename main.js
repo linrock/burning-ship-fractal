@@ -102,8 +102,16 @@ function drawCanvases() {
     }
   );
 
-  // black ship, orange background, yellow flames
-  renderBsfCanvas('bsf-1',
+  // large ship - iteration count alone
+  renderBsfCanvas('bsf-large-ship-1',
+    [-1.8, -1.7], [-0.08, 0.01],
+    (iteration, modulusSq) => {
+      return [ 255, ~~(iteration * 7), 0, ~~(iteration * 15) ];
+    }
+  );
+
+  // large ship - re-normalized
+  renderBsfCanvas('bsf-large-ship-2',
     [-1.8, -1.7], [-0.08, 0.01],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
@@ -111,16 +119,8 @@ function drawCanvases() {
     }
   );
 
-  // bright orange and yellow one
-  renderBsfCanvas('bsf-2',
-    [-1.8, -1.7], [-0.08, 0.01],
-    (iteration, modulusSq) => {
-      return [ 255, ~~(iteration * 7), 0, ~~(iteration * 15) ];
-    }
-  );
-
   // zoomed-out view
-  renderBsfCanvas('bsf-large',
+  renderBsfCanvas('bsf-world-overview',
     [-2.5, 1.5], [-2, 1],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
@@ -129,7 +129,7 @@ function drawCanvases() {
   );
 
   // zoomed into one of the smaller ships
-  renderBsfCanvas('bsf-4',
+  renderBsfCanvas('bsf-small-ship-1',
     [-1.5805, -1.563], [-0.0405, 0.0057],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
@@ -138,7 +138,7 @@ function drawCanvases() {
   );
 
   // another one of the smaller ships
-  renderBsfCanvas('bsf-5',
+  renderBsfCanvas('bsf-small-ship-2',
     [-1.948, -1.925], [-0.0095,  0.002],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
