@@ -131,10 +131,10 @@ function drawCanvases() {
         return [0, 0, 0, 255];
       }
       return [
-        25 + iteration * 30,
-        25 + iteration * 10,
-        85 - iteration * 5,
         255,
+        ~~(iteration * 7),
+        0,
+        ~~(iteration * 15),
       ];
     }
   ).render();
