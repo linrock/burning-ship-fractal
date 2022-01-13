@@ -142,7 +142,7 @@ function drawCanvases() {
     [-1.948, -1.925], [-0.0095,  0.002],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
-      return [ 255, ~~(mu * 12), 0, ~~(mu * 12) ];
+      return [ 255, ~~(mu * 8), 0, ~~(mu * 20) ];
     },
   );
 }
