@@ -27,6 +27,7 @@ class BurningShipFractalCanvas {
     this.canvas = document.getElementById(canvasId);
     this.canvasWidth = this.canvas.width;
     this.canvasHeight = this.canvas.height;
+    this.hasRendered = false;
     this.xRange = xRange;
     this.yRange = yRange;
     this.colorFunc = colorFunc;
@@ -56,6 +57,13 @@ class BurningShipFractalCanvas {
       this.yRange[1] = y1;
       this.render();
     });
+    this.canvas.addEventListener('render', () => {
+      if (!this.hasRendered) {
+        console.log(`rendering ${canvasId}`);
+        this.hasRendered = true;
+        this.render();
+      }
+    });
   }
 
   render() {
@@ -78,7 +86,9 @@ class BurningShipFractalCanvas {
         }
       }
     }
-    context.putImageData(canvasImageData, 0, 0);
+    requestAnimationFrame(() => {
+      context.putImageData(canvasImageData, 0, 0);
+    });
   }
 }
 
@@ -88,8 +98,7 @@ function getMu(iteration, modulusSq) {
 }
 
 function renderBsfCanvas(canvasId, xRange, yRange, drawFunc) {
-  new BurningShipFractalCanvas(
-    canvasId, xRange, yRange, drawFunc).render();
+  new BurningShipFractalCanvas(canvasId, xRange, yRange, drawFunc);
 }
 
 function drawCanvases() {
@@ -148,6 +157,37 @@ function drawCanvases() {
 }
 
 {
+ // frequency of polling to decide whether to render a canvas
+  const VIZ_POLL_INTERVAL_MS = 200;
+
+  // centralize all fractal canvases in one place
+  const fractalCanvases = [];
+
+  const RENDER_EVENT = new CustomEvent('render');
+
+  function renderVisibleFractalCanvases() {
+    const viewportHeight = window.innerHeight;
+    const canvases = document.getElementsByTagName('canvas');
+    [...canvases].forEach((canvas) => {
+      const rect = canvas.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > viewportHeight) {
+        // canvas is not visible
+      } else {
+        // canvas is visible
+        canvas.dispatchEvent(RENDER_EVENT);
+      }
+    });
+  }
+
+  function renderVisibleFractalCanvasesForever() {
+    renderVisibleFractalCanvases();
+    setTimeout(() => {
+      renderVisibleFractalCanvasesForever();
+    }, VIZ_POLL_INTERVAL_MS);
+  }
+
+  renderVisibleFractalCanvasesForever();
+
   document.querySelector("#update").onclick = () => {
     console.log('clicked button');
     x_range[0] = Number(document.querySelector('#x_range_0').value);
