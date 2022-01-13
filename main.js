@@ -80,6 +80,11 @@ class BurningShipFractalCanvas {
   }
 }
 
+function getMu(iteration, modulusSq) {
+  // https://mathr.co.uk/helm/AtTheHelmOfTheBurningShip-Paper.pdf
+  return iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
+}
+
 function drawCanvases() {
   // thin and wide at the top of the page
   new BurningShipFractalCanvas('bsf-wide',
@@ -89,7 +94,7 @@ function drawCanvases() {
       if (iteration === MAX_ITERATIONS) {
         return [200, 70, 5, 255];
       }
-      const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
+      const mu = getMu(iteration, modulusSq);
       return [
         25 + mu * 30,
         25 + mu * 10,
@@ -107,8 +112,7 @@ function drawCanvases() {
       if (iteration === MAX_ITERATIONS) {
         return [0, 0, 0, 255];
       }
-      // https://mathr.co.uk/helm/AtTheHelmOfTheBurningShip-Paper.pdf
-      const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
+      const mu = getMu(iteration, modulusSq);
       return [
         255,
         ~~(mu * 7),
@@ -150,8 +154,7 @@ function drawCanvases() {
       if (iteration === MAX_ITERATIONS) {
         return [0, 0, 0, 255];
       }
-      // const mu = iteration - (Math.log(Math.log(Math.sqrt(modulusSq)))) / Math.log(2.0);
-      const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
+      const mu = getMu(iteration, modulusSq);
       return [
         25 + mu * 30,
         25 + mu * 10,
@@ -170,7 +173,7 @@ function drawCanvases() {
         return [0, 0, 0, 255];
       }
       // http://linas.org/art-gallery/escape/escape.html
-      const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
+      const mu = getMu(iteration, modulusSq);
       return [
         255,
         ~~(mu * 5),
@@ -188,7 +191,7 @@ function drawCanvases() {
         return [0, 0, 0, 255];
       }
       // http://linas.org/art-gallery/escape/escape.html
-      const mu = iteration - (Math.log(Math.log(Math.sqrt(modulusSq)))) / Math.log(2.0);
+      const mu = getMu(iteration, modulusSq);
       return [
         255,
         ~~(mu * 12),
