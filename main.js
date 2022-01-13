@@ -177,8 +177,8 @@ function drawCanvases() {
   ).render();
 
   new BurningShipFractalCanvas('bsf-5',
-    [-1.9484936376953126, -1.9274103762329102],
-    [-0.009537646015624995, 0.0022484190718750014],
+    [-1.948, -1.925],
+    [-0.0095,  0.002],
     (iteration, modulusSq) => {
       if (iteration === MAX_ITERATIONS) {
         return [0, 0, 0, 255];
