@@ -70,9 +70,11 @@ class BurningShipFractalCanvas {
         const y0 = this.yRange[0] + i * (this.yRange[1] - this.yRange[0]) / this.canvasHeight;
         const [numIterations, escapeDistSq] = iterateUntilEscape(x0, y0);
         const ind = i * this.canvasWidth * 4 + j * 4;
-        const pixels = this.colorFunc(numIterations, escapeDistSq);
-        for (let p = 0; p < 4; p++) {
-          image[ind + p] = pixels[p];
+        if (numIterations !== MAX_ITERATIONS) {
+          const pixels = this.colorFunc(numIterations, escapeDistSq);
+          for (let p = 0; p < 4; p++) {
+            image[ind + p] = pixels[p];
+          }
         }
       }
     }
@@ -90,7 +92,6 @@ function drawCanvases() {
   new BurningShipFractalCanvas('bsf-wide',
     [-2.0, -1.5], [-0.09, 0.02],
     (iteration, modulusSq) => {
-      if (iteration === MAX_ITERATIONS) return [200, 70, 5, 255];
       const mu = getMu(iteration, modulusSq);
       return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
     }
@@ -100,7 +101,6 @@ function drawCanvases() {
   new BurningShipFractalCanvas('bsf-1',
     [-1.8, -1.7], [-0.08, 0.01],
     (iteration, modulusSq) => {
-      if (iteration === MAX_ITERATIONS) return [0, 0, 0, 255];
       const mu = getMu(iteration, modulusSq);
       return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
     }
@@ -110,7 +110,6 @@ function drawCanvases() {
   new BurningShipFractalCanvas('bsf-2',
     [-1.8, -1.7], [-0.08, 0.01],
     (iteration, modulusSq) => {
-      if (iteration === MAX_ITERATIONS) return [0, 0, 0, 255];
       return [ 255, ~~(iteration * 7), 0, ~~(iteration * 15) ];
     }
   ).render();
@@ -119,7 +118,6 @@ function drawCanvases() {
   new BurningShipFractalCanvas('bsf-large',
     [-2.5, 1.5], [-2, 1],
     (iteration, modulusSq) => {
-      if (iteration === MAX_ITERATIONS) return [0, 0, 0, 255];
       const mu = getMu(iteration, modulusSq);
       return [ 25 + mu * 30, 25 + mu * 10, 85 - mu * 5, 255 ];
     }
@@ -129,7 +127,6 @@ function drawCanvases() {
   new BurningShipFractalCanvas('bsf-4',
     [-1.5805, -1.563], [-0.0405, 0.0057],
     (iteration, modulusSq) => {
-      if (iteration === MAX_ITERATIONS) return [0, 0, 0, 255];
       const mu = getMu(iteration, modulusSq);
       return [ 255, ~~(mu * 5), 0, ~~(mu * 12) ];
     },
@@ -138,7 +135,6 @@ function drawCanvases() {
   new BurningShipFractalCanvas('bsf-5',
     [-1.948, -1.925], [-0.0095,  0.002],
     (iteration, modulusSq) => {
-      if (iteration === MAX_ITERATIONS) return [0, 0, 0, 255];
       const mu = getMu(iteration, modulusSq);
       return [ 255, ~~(mu * 12), 0, ~~(mu * 12) ];
     },
