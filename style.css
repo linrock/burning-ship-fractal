@@ -48,6 +48,7 @@ canvas {
   max-width: 100%;
 }
 figcaption {
+  text-align: right;
   opacity: 0.5;
 }
 pre {
