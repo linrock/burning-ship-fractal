@@ -5,7 +5,8 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Biryani&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Biryani&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -41,7 +42,10 @@
       of escapes.
     </p>
     <canvas id="bsf-large-ship-1" width="1600" height="1600"></canvas>
-    <figcaption>x [-1.8, -1.7] <br>y [-0.08, 0.01]</figcaption>
+    <figcaption>
+      x [-1.8, -1.7] <br>
+      y [-0.08, 0.01]
+    </figcaption>
 
     <p>
       If we consider the magnitude of the escape, the resulting
@@ -50,7 +54,10 @@
       iteration counts
     </p>
     <canvas id="bsf-large-ship-2" width="1600" height="1600"></canvas>
-    <figcaption>x [-1.8, -1.7] <br>y [-0.08, 0.01]</figcaption>
+    <figcaption>
+      x [-1.8, -1.7] <br>
+      y [-0.08, 0.01]
+    </figcaption>
 
     <div style="display: none">
       <input id="x_range_0" type="text" value="-1.8" />
@@ -65,15 +72,26 @@
     <p>The zoomed-out view of the fractal space</p>
     <canvas id="bsf-world-overview" width="800"
                                     height="600"></canvas>
-    <figcaption>x [-2.5, 1.5] <br>y [-2, 1]</figcaption>
+    <figcaption>
+      x [-2.5, 1.5] <br>
+      y [-2, 1]
+    </figcaption>
 
     <p>Zoomed in to one of the smaller ships</p>
     <canvas id="bsf-small-ship-1" width="400"
                                   height="600"></canvas>
+    <figcaption>
+      x [-1.5805, -1.563] <br>
+      y [-0.0405, 0.0057]
+    </figcaption>
 
     <p>Another one of the smaller ships</p>
     <canvas id="bsf-small-ship-2" width="400"
                                   height="300"></canvas>
+    <figcaption>
+      x [-1.948, -1.925] <br>
+      y [-0.0095,  0.002]
+    </figcaption>
 
     <p>The number of iterations is determined by this equation:</p>
     <pre>
@@ -84,14 +102,14 @@ function iterateUntilEscape(x0, y0) {
   let x = 0;
   let y = 0;
   let iteration = 0;
-  while ((x * x + y * y < ESCAPE_THRESHOLD) && (iteration &lt; MAX_ITERATIONS)) {
-    const x_n = x * x - y * y + x0;
-    const y_n = 2 * Math.abs(x * y) + y0;
-    x = x_n;
-    y = y_n;
+  while ((x*x + y*y < ESCAPE_THRESHOLD) && (iteration &lt; MAX_ITERATIONS)) {
+    const x_next = x*x - y*y + x0;
+    const y_next = 2*Math.abs(x*y) + y0;
+    x = x_next;
+    y = y_next;
     iteration++;
   }
-  return [iteration, xSq + ySq];
+  return [iteration, x*x + y*y];
 }</pre>
   </div>
 

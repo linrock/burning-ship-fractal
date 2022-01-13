@@ -47,6 +47,9 @@ canvas {
   border: 0;
   max-width: 100%;
 }
+figcaption {
+  opacity: 0.5;
+}
 pre {
   background: #121212;
   color: #e0e0e0;
