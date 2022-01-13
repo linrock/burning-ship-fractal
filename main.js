@@ -110,10 +110,10 @@ function drawCanvases() {
       // https://mathr.co.uk/helm/AtTheHelmOfTheBurningShip-Paper.pdf
       const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
       return [
-        25 + mu * 30,
-        25 + mu * 10,
-        85 - mu * 5,
         255,
+        ~~(mu * 7),
+        0,
+        ~~(mu * 15),
       ];
     }
   ).render();
@@ -171,7 +171,12 @@ function drawCanvases() {
       }
       // http://linas.org/art-gallery/escape/escape.html
       const mu = iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
-      return [0, 0, 0, 255 - ~~mu];
+      return [
+        255,
+        ~~(mu * 5),
+        0,
+        ~~(mu * 12),
+      ];
     },
   ).render();
 
@@ -185,10 +190,10 @@ function drawCanvases() {
       // http://linas.org/art-gallery/escape/escape.html
       const mu = iteration - (Math.log(Math.log(Math.sqrt(modulusSq)))) / Math.log(2.0);
       return [
-        25 + mu * 30,
-        25 + mu * 10,
-        85 - mu * 5,
         255,
+        ~~(mu * 12),
+        0,
+        ~~(mu * 12),
       ];
     },
   ).render();
