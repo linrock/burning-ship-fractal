@@ -23,7 +23,8 @@ a {
   color: inherit;
 }
 h1 {
-  color: #fafafa;
+  /** color: #fafafa; */
+  color: #ffe100;
   position: absolute;
   margin-left: 2rem;
 }
