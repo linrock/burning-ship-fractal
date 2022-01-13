@@ -14,6 +14,12 @@
     <h1>Burning ship fractal</h1>
     <canvas id="bsf-wide" width="4000"
                           height="1000"></canvas>
+    <div class="container">
+      <figcaption>
+        x [-2.0, -1.5] <br>
+        y [-0.09, 0.02]
+      </figcaption>
+    </div>
   </header>
 
   <div class="container">
@@ -123,10 +129,10 @@ function iterateUntilEscape(x0, y0) {
 
       <p>TODO</p>
       <ul>
-        <li>Choose better colors and color palettes</li>
-        <li>Show the (x, y) ranges for plotting each canvas</li>
+        <li>Maybe show the (x0, y0) center of each canvas</li>
         <li>Enable dragging on a canvas to pan the camera view</li>
         <li>Draw boxes when selecting parts of the canvas to zoom in on</li>
+        <li>Enable undo-ing the last camera action</li>
       </ul>
     </div>
   </section>
