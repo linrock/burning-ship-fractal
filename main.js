@@ -139,13 +139,6 @@ function drawCanvases() {
     }
   ).render();
 
-  // colored with the iteration count as the alpha channel
-  new BurningShipFractalCanvas('bsf-3',
-    [-1.8, -1.7],
-    [-0.08, 0.01],
-    (iteration) => [0, 0, 0, iteration],
-  ).render();
-
   // zoomed-out view
   new BurningShipFractalCanvas('bsf-large',
     [-2.5, 1.5],
