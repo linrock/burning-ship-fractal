@@ -10,7 +10,8 @@ const App = () => (
     <header className="App-header">
       <h1>Burning ship fractal</h1>
       <FractalCanvas id="bsf-wide"
-        width={4000} height={1000}
+        width={4000}
+        height={1000}
         xRange={[-2.0, -1.5]}
         yRange={[-0.09, 0.01]}
         colorFunc={(iteration, modulusSq) => {

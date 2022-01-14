@@ -80,8 +80,6 @@ class BurningShipFractalCanvas {
   }
 
   render() {
-    console.log(`xRange: ${this.xRange}`);
-    console.log(`yRange: ${this.yRange}`);
     const context = this.canvas.getContext('2d');
     const canvasImageData = context.createImageData(this.canvasWidth, this.canvasHeight);
     const image = canvasImageData.data;
@@ -147,6 +145,7 @@ function drawCanvases() {
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
       return [ 25 + mu * 30, 25 + mu * 10, 85 - mu * 5, 255 ];
+      // return [ 255, ~~(mu * 10), 0, ~~(mu * 25) ];
     }
   );
 
