@@ -6,7 +6,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" />
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Space+Grotesk&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Space+Grotesk&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -107,7 +108,7 @@ function iterateUntilEscape(x0, y0) {
   let x = 0;
   let y = 0;
   let iteration = 0;
-  while ((x*x + y*y < ESCAPE_THRESHOLD) &&
+  while ((x*x + y*y <lt; ESCAPE_THRESHOLD) &&
          (iteration &lt; MAX_ITERATIONS)) {
     const x_next = x*x - y*y + x0;
     const y_next = 2*Math.abs(x*y) + y0;
