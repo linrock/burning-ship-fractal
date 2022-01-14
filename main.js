@@ -118,7 +118,7 @@ function drawCanvases() {
     [-2.0, -1.5], [-0.09, 0.02],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
-      return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
+      return [ 255, mu * 7, 0, mu * 15 ];
     }
   );
 
@@ -126,7 +126,7 @@ function drawCanvases() {
   renderBsfCanvas('bsf-large-ship-1',
     [-1.8, -1.7], [-0.08, 0.01],
     (iteration, modulusSq) => {
-      return [ 255, ~~(iteration * 7), 0, ~~(iteration * 15) ];
+      return [ 255, iteration * 7, 0, iteration * 15 ];
     }
   );
 
@@ -135,7 +135,7 @@ function drawCanvases() {
     [-1.8, -1.7], [-0.08, 0.01],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
-      return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
+      return [ 255, mu * 7, 0, mu * 15 ];
     }
   );
 
@@ -154,7 +154,7 @@ function drawCanvases() {
     [-1.5805, -1.563], [-0.0405, 0.0057],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
-      return [ 255, ~~(mu * 5), 0, ~~(mu * 12) ];
+      return [ 255, mu * 5, 0, mu * 12 ];
     },
   );
 
@@ -163,7 +163,7 @@ function drawCanvases() {
     [-1.948, -1.925], [-0.0095,  0.002],
     (iteration, modulusSq) => {
       const mu = getMu(iteration, modulusSq);
-      return [ 255, ~~(mu * 8), 0, ~~(mu * 20) ];
+      return [ 255, mu * 8, 0, mu * 20 ];
     },
   );
 }
