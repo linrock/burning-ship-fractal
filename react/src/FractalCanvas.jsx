@@ -72,6 +72,10 @@ export function FractalCanvas({ width, height, xRange, yRange, colorFunc }) {
       onMouseLeave={() => {
         console.log('the mouse left');
       }}></canvas>
-    <figcaption>({mousePosX}, {mousePosY})</figcaption>
+    <figcaption>
+      x [{xRange[0]}, {xRange[1]}] <br/>
+      y [{yRange[0]}, {yRange[1]}] <br/>
+      ({mousePosX}, {mousePosY})
+    </figcaption>
   </figure>;
 }

@@ -39,9 +39,77 @@ const App = () => (
           </ul>
         </p>
       </section>
+
+      <p>
+        Here's the largest ship in the fractal, colored based on
+        iteration count alone.
+      </p>
+      <FractalCanvas id="bsf-wide"
+        width={1600}
+        height={1600}
+        xRange={[-1.8, -1.7]}
+        yRange={[-0.08, 0.01]}
+        colorFunc={(iteration, modulusSq) => {
+          return [ 255, ~~(iteration * 7), 0, ~~(iteration * 15) ];
+        }}
+      />
+
+      <p>
+        If we consider the magnitude of the escape, the resulting
+        image will appear smoother with the same color palette.
+        Here's the largest ship colored with renormalized
+        iteration counts.
+      </p>
+      <FractalCanvas id="bsf-wide-2"
+        width={1600}
+        height={1600}
+        xRange={[-1.8, -1.7]}
+        yRange={[-0.08, 0.01]}
+        colorFunc={(iteration, modulusSq) => {
+          const mu = getMu(iteration, modulusSq);
+          return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
+        }}
+      />
+
+      <p>The zoomed-out view of the fractal space</p>
+      <FractalCanvas id="bsf-world-overview"
+        width={800}
+        height={600}
+        xRange={[-2.5, 1.5]}
+        yRange={[-2, 1.0]}
+        colorFunc={(iteration, modulusSq) => {
+          const mu = getMu(iteration, modulusSq);
+          return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
+        }}
+      />
+
+      <p>Zoomed in to one of the smaller ships</p>
+      <FractalCanvas
+        width={400}
+        height={600}
+        xRange={[-1.5805, -1.563]}
+        yRange={[-0.0405, 0.0057]}
+        colorFunc={(iteration, modulusSq) => {
+          const mu = getMu(iteration, modulusSq);
+          return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
+        }}
+      />
+
+      <p>Another one of the smaller ships</p>
+      <FractalCanvas
+        width={400}
+        height={300}
+        xRange={[-1.948, -1.925]}
+        yRange={[-0.0095,  0.002]}
+        colorFunc={(iteration, modulusSq) => {
+          const mu = getMu(iteration, modulusSq);
+          return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
+        }}
+      />
     </div>
 
     <div className="container">
+      <p>The number of iterations is determined by this equation:</p>
       <pre>{`
 const ESCAPE_THRESHOLD = 4;
 const MAX_ITERATIONS = 255;
