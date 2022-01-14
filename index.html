@@ -108,7 +108,7 @@ function iterateUntilEscape(x0, y0) {
   let x = 0;
   let y = 0;
   let iteration = 0;
-  while ((x*x + y*y <lt; ESCAPE_THRESHOLD) &&
+  while ((x*x + y*y < ESCAPE_THRESHOLD) &&
          (iteration &lt; MAX_ITERATIONS)) {
     const x_next = x*x - y*y + x0;
     const y_next = 2*Math.abs(x*y) + y0;

@@ -19,6 +19,8 @@ class BurningShipFractalCanvas {
   canvas;
   canvasWidth;
   canvasHeight;
+  actualWidth;
+  actualHeight;
   xRange;
   yRange;
   colorFunc;
@@ -27,6 +29,8 @@ class BurningShipFractalCanvas {
     this.canvas = document.getElementById(canvasId);
     this.canvasWidth = this.canvas.width;
     this.canvasHeight = this.canvas.height;
+    this.actualWidth = this.canvas.offsetWidth;
+    this.actualHeight = this.canvas.offsetHeight;
     this.hasRendered = false;
     this.xRange = xRange;
     this.yRange = yRange;
@@ -35,27 +39,36 @@ class BurningShipFractalCanvas {
       // console.log(`canvas mousedown - ${event.offsetX}, ${event.offsetY}`);
       // console.dir(event);
       const x0 =
-        this.xRange[0] * (1 - event.offsetX / this.canvasWidth) +
-        this.xRange[1] * (event.offsetX / this.canvasWidth);
+        this.xRange[0] * (1 - event.offsetX / this.actualWidth) +
+        this.xRange[1] * (event.offsetX / this.actualWidth);
       const y0 =
-        this.yRange[0] * (1 - event.offsetY / this.canvasHeight) +
-        this.yRange[1] * (event.offsetY / this.canvasHeight);
+        this.yRange[0] * (1 - event.offsetY / this.actualHeight) +
+        this.yRange[1] * (event.offsetY / this.actualHeight);
       // console.log(`(${x0}, ${y0})`);
       this.xRange[0] = x0;
       this.yRange[0] = y0;
     });
     this.canvas.addEventListener('mouseup', (event) => {
-      // console.log(`canvas mouseup - ${event.offsetX}, ${event.offsetY}`);
+      // console.log(`actual mouseup - ${event.offsetX}, ${event.offsetY}`);
       // console.dir(event);
       const x1 =
-        this.xRange[0] * (1 - event.offsetX / this.canvasWidth) +
-        this.xRange[1] * (event.offsetX / this.canvasWidth);
+        this.xRange[0] * (1 - event.offsetX / this.actualWidth) +
+        this.xRange[1] * (event.offsetX / this.actualWidth);
       const y1 =
-        this.yRange[0] * (1 - event.offsetY / this.canvasHeight) +
-        this.yRange[1] * (event.offsetY / this.canvasHeight);
+        this.yRange[0] * (1 - event.offsetY / this.actualHeight) +
+        this.yRange[1] * (event.offsetY / this.actualHeight);
       this.xRange[1] = x1;
       this.yRange[1] = y1;
       this.render();
+    });
+    this.canvas.addEventListener('mousemove', (event) => {
+      const x =
+        this.xRange[0] * (1 - event.offsetX / this.actualWidth) +
+        this.xRange[1] * (event.offsetX / this.actualWidth);
+      const y =
+        this.yRange[0] * (1 - event.offsetY / this.actualHeight) +
+        this.yRange[1] * (event.offsetY / this.actualHeight);
+      console.log(`(${x.toPrecision(4)}, ${y.toPrecision(4)})`);
     });
     this.canvas.addEventListener('render', () => {
       if (!this.hasRendered) {
