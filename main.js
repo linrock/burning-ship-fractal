@@ -168,7 +168,7 @@ function drawCanvases() {
   );
 }
 
-{
+(() => {
  // frequency of polling to decide whether to render a canvas
   const VIZ_POLL_INTERVAL_MS = 200;
 
@@ -210,4 +210,4 @@ function drawCanvases() {
   };
 
   drawCanvases();
-}
+})();
