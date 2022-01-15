@@ -38,18 +38,6 @@ const App = () => <>
     </section>
 
     <p>
-      Here's the largest ship in the fractal, colored based on
-      iteration count alone.
-    </p>
-    <FractalCanvas id="bsf-wide"
-      width={1600}
-      height={1600}
-      xRange={[-1.8, -1.7]}
-      yRange={[-0.08, 0.01]}
-      colorFunc={(iteration) => [ 255, iteration * 7, 0, iteration * 15 ]}
-    />
-
-    <p>
       If we consider the magnitude of the escape, the resulting
       image will appear smoother with the same color palette.
       Here's the largest ship colored with renormalized
@@ -63,7 +51,10 @@ const App = () => <>
       colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
-    <p>A zoomed-out view of the fractal space</p>
+    <p>
+      A zoomed-out view of the fractal world. The ships that gave this fractal
+      its name are located around the real axis (y = 0).
+      </p>
     <FractalCanvas id="bsf-world-overview"
       width={800}
       height={600}
@@ -72,7 +63,7 @@ const App = () => <>
       colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
-    <p>Zooming in closer to the ships</p>
+    <p>Zooming in closer to the ships in the bottom left</p>
     <FractalCanvas id="bsf-world-ships"
       width={800}
       height={600}
@@ -81,7 +72,7 @@ const App = () => <>
       colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
-    <p>The ship near -1.6</p>
+    <p>The ship near -1.6 between the largest ship and the dark expanse.</p>
     <FractalCanvas id="bsf-world-ships"
       width={800}
       height={800}
@@ -97,6 +88,18 @@ const App = () => <>
       xRange={[-1.5805, -1.563]}
       yRange={[-0.0405, 0.0057]}
       colorFunc={(iteration, mu) => [ 255, mu * 6, 0, mu * 15 ]}
+    />
+
+    <p>
+      Behind the largest ship are a few very small ships. The light ends
+      at (-2, 0)
+    </p>
+    <FractalCanvas id="bsf-world-back"
+      width={800}
+      height={600}
+      xRange={[-2.04, -1.66]}
+      yRange={[-0.142, 0.072]}
+      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
     <p>Zoomed in to an even smaller ship near -1.94</p>
@@ -130,6 +133,33 @@ function iterateUntilEscape(x0, y0) {
   return [iteration, x*x + y*y];
 }
 `.trim()}</SyntaxHighlighter>
+  </div>
+
+  <div className="container">
+    <p>
+      Here's the largest ship in the fractal, colored based on
+      iteration count alone.
+    </p>
+    <FractalCanvas id="bsf-wide"
+      width={1600}
+      height={1600}
+      xRange={[-1.8, -1.7]}
+      yRange={[-0.08, 0.01]}
+      colorFunc={(iteration) => [ 255, iteration * 7, 0, iteration * 15 ]}
+    />
+    <p>
+      If we consider the magnitude of the escape, the resulting
+      image will appear smoother with the same color palette.
+      Here's the largest ship colored with renormalized
+      iteration counts.
+    </p>
+    <FractalCanvas id="bsf-wide-2"
+      width={1600}
+      height={1600}
+      xRange={[-1.8, -1.7]}
+      yRange={[-0.08, 0.01]}
+      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+    />
   </div>
 </>;
 
