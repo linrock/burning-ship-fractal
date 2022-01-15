@@ -37,9 +37,7 @@ function drawCanvas(canvasEl, xRange, yRange, colorFunc) {
       }
     }
   }
-  requestAnimationFrame(() => {
-    context.putImageData(canvasImageData, 0, 0);
-  });
+  context.putImageData(canvasImageData, 0, 0);
 }
 
 /** Interactive canvas that draws burning ship fractals */
@@ -54,32 +52,50 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
   const [mousePosY, setMousePosY] = useState();
 
   const [isRendered, setIsRendered] = useState(false);
+  const [previewImgData, setPreviewImgData] = useState();
 
   const canvasElRef = useRef();
+  const imgPreviewElRef = useRef();
+
+  // track the actual width and height of the canvas DOM element
   useEffect(() => {
     const canvasEl = canvasElRef.current;
-    setActualWidth(canvasEl.offsetWidth);
-    setActualHeight(canvasEl.offsetHeight);
+    const actualWidth = canvasEl.offsetWidth;
+    const actualHeight = canvasEl.offsetHeight;
+    setActualWidth(actualWidth);
+    setActualHeight(actualHeight);
     console.log(`canvas changed
-  el size: (${canvasEl.offsetWidth}, ${canvasEl.offsetHeight})
+  el size: (${actualWidth}, ${actualHeight})
   xRange: (${xRange})
   yRange: (${yRange})
     `);
-  }, [canvasElRef, xRange, yRange, colorFunc]);
+    const previewCanvasEl = document.createElement('canvas');
+    previewCanvasEl.width = actualWidth / 10;
+    previewCanvasEl.height = actualHeight / 10;
+    requestAnimationFrame(() => {
+      drawCanvas(previewCanvasEl, xRange, yRange, colorFunc);
+      setPreviewImgData(previewCanvasEl.toDataURL('image/png'));
+    });
+  }, [canvasElRef, xRange, yRange]);
 
+  // listen for a "render" event, render the canvas, then unlisten
   useEffect(() => {
     const canvasEl = canvasElRef.current;
     const renderListener = () => {
+      canvasEl.removeEventListener('render', renderListener);
       if (!isRendered) {
         console.log('not rendered yet! rendering...');
-        canvasEl.removeEventListener('render', renderListener);
-        setIsRendered(true);
-        drawCanvas(canvasEl, xRange, yRange, colorFunc);
+        requestAnimationFrame(() => {
+          drawCanvas(canvasEl, xRange, yRange, colorFunc);
+          setIsRendered(true);
+        });
       }
     };
     canvasEl.addEventListener('render', renderListener);
-  }, [canvasElRef, isRendered]);
+  }, [canvasElRef, isRendered, xRange, yRange, colorFunc]);
 
+
+  // for calculating mouse (x, y) positions over the canvas relative to actual size
   const mouseXY = (event) => {
     const X = (event.pageX - event.target.offsetLeft);
     const Y = (event.pageY - event.target.offsetTop);
@@ -91,29 +107,33 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
   }
 
   return <figure>
-    <canvas ref={canvasElRef}
-      width={width}
-      height={height}
-      onMouseDown={(event) => {
-        const [mouseX, mouseY] = mouseXY(event);
-        setXrange([mouseX, xRange[1]]);
-        setYrange([mouseY, yRange[1]]);
-      }}
-      onMouseUp={(event) => {
-        const [mouseX, mouseY] = mouseXY(event);
-        setXrange([xRange[0], mouseX]);
-        setYrange([yRange[0], mouseY]);
-        setIsRendered(false);
-      }}
-      onMouseMove={(event) => {
-        const [mouseX, mouseY] = mouseXY(event);
-        setMousePosX(mouseX.toPrecision(4));
-        setMousePosY(mouseY.toPrecision(4));
-      }}
-      onMouseLeave={() => {
-        setMousePosX(null);
-        setMousePosY(null);
-      }}></canvas>
+    <div className="image-container">
+      <img src={previewImgData} style={{ width: '100%', display: isRendered ? 'none': 'block' }}/>
+      <canvas ref={canvasElRef}
+        width={width}
+        height={height}
+        onMouseDown={(event) => {
+          const [mouseX, mouseY] = mouseXY(event);
+          setXrange([mouseX, xRange[1]]);
+          setYrange([mouseY, yRange[1]]);
+        }}
+        onMouseUp={(event) => {
+          const [mouseX, mouseY] = mouseXY(event);
+          setXrange([xRange[0], mouseX]);
+          setYrange([yRange[0], mouseY]);
+          setIsRendered(false);
+        }}
+        onMouseMove={(event) => {
+          const [mouseX, mouseY] = mouseXY(event);
+          setMousePosX(mouseX.toPrecision(4));
+          setMousePosY(mouseY.toPrecision(4));
+        }}
+        onMouseLeave={() => {
+          setMousePosX(null);
+          setMousePosY(null);
+        }}>
+      </canvas>
+    </div>
     <figcaption>
       x [{xRange[0]}, {xRange[1]}] <br/>
       y [{yRange[0]}, {yRange[1]}] <br/>
