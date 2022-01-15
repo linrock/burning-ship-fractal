@@ -71,11 +71,25 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
     `);
     // render a low-quality preview early on
     const previewCanvasEl = document.createElement('canvas');
-    previewCanvasEl.width = actualWidth / 10;
-    previewCanvasEl.height = actualHeight / 10;
+    previewCanvasEl.width = actualWidth / 8;
+    previewCanvasEl.height = actualHeight / 8;
     requestAnimationFrame(() => {
       drawCanvas(previewCanvasEl, xRange, yRange, colorFunc);
       setPreviewImgData(previewCanvasEl.toDataURL('image/png'));
+
+      previewCanvasEl.width = actualWidth / 4;
+      previewCanvasEl.height = actualHeight / 4;
+      requestAnimationFrame(() => {
+        drawCanvas(previewCanvasEl, xRange, yRange, colorFunc);
+        setPreviewImgData(previewCanvasEl.toDataURL('image/png'));
+
+        previewCanvasEl.width = actualWidth / 2;
+        previewCanvasEl.height = actualHeight / 2;
+        requestAnimationFrame(() => {
+          drawCanvas(previewCanvasEl, xRange, yRange, colorFunc);
+          setPreviewImgData(previewCanvasEl.toDataURL('image/png'));
+        });
+      });
     });
   }, [canvasElRef, xRange, yRange]);
 
