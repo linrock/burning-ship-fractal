@@ -1,5 +1,5 @@
 const MAX_ITERATIONS = 255;
-const ESCAPE_THRESHOLD = 4;
+const ESCAPE_THRESHOLD = 10;
 
 /** Until escape or exceeding the max # of iterations */
 function iterateUntilEscape(x0, y0) {

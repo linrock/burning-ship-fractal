@@ -88,25 +88,25 @@ const App = () => (
 
       <p>Zoomed in to one of the smaller ships</p>
       <FractalCanvas
-        width={400}
-        height={600}
+        width={1600}
+        height={2400}
         xRange={[-1.5805, -1.563]}
         yRange={[-0.0405, 0.0057]}
         colorFunc={(iteration, modulusSq) => {
           const mu = getMu(iteration, modulusSq);
-          return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
+          return [ 255, ~~(mu * 6), 0, ~~(mu * 15) ];
         }}
       />
 
       <p>Another one of the smaller ships</p>
       <FractalCanvas
-        width={800}
-        height={600}
+        width={1600}
+        height={1200}
         xRange={[-1.948, -1.925]}
         yRange={[-0.0095,  0.002]}
         colorFunc={(iteration, modulusSq) => {
           const mu = getMu(iteration, modulusSq);
-          return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
+          return [ 255, ~~(mu * 10), 0, ~~(mu * 15) ];
         }}
       />
     </div>
