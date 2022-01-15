@@ -80,38 +80,32 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
     canvasEl.addEventListener('render', renderListener);
   }, [canvasElRef, isRendered]);
 
+  const mouseXY = (event) => {
+    const mouseX =
+      xRange[0] * (1 - event.clientX / actualWidth) +
+      xRange[1] * (event.clientX / actualWidth);
+    const mouseY =
+      yRange[0] * (1 - event.clientY / actualHeight) +
+      yRange[1] * (event.clientY / actualHeight);
+    return [mouseX, mouseY];
+  }
+
   return <figure>
     <canvas ref={canvasElRef}
       width={width}
       height={height}
       onMouseDown={(event) => {
-        const mouseX =
-          xRange[0] * (1 - event.clientX / actualWidth) +
-          xRange[1] * (event.clientX / actualWidth);
-        const mouseY =
-          yRange[0] * (1 - event.clientY / actualHeight) +
-          yRange[1] * (event.clientY / actualHeight);
+        const [mouseX, mouseY] = mouseXY(event);
         setXrange([mouseX, xRange[1]]);
         setYrange([mouseY, yRange[1]]);
       }}
       onMouseUp={(event) => {
-        const mouseX =
-          xRange[0] * (1 - event.clientX / actualWidth) +
-          xRange[1] * (event.clientX / actualWidth);
-        const mouseY =
-          yRange[0] * (1 - event.clientY / actualHeight) +
-          yRange[1] * (event.clientY / actualHeight);
+        const [mouseX, mouseY] = mouseXY(event);
         setXrange([xRange[0], mouseX]);
         setYrange([yRange[0], mouseY]);
       }}
       onMouseMove={(event) => {
-        const mouseX =
-          xRange[0] * (1 - event.clientX / actualWidth) +
-          xRange[1] * (event.clientX / actualWidth);
-        const mouseY =
-          yRange[0] * (1 - event.clientY / actualHeight) +
-          yRange[1] * (event.clientY / actualHeight);
-        // console.log(`(${x.toPrecision(4)}, ${y.toPrecision(4)})`);
+        const [mouseX, mouseY] = mouseXY(event);
         setMousePosX(mouseX.toPrecision(4));
         setMousePosY(mouseY.toPrecision(4));
       }}
