@@ -103,6 +103,7 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
         const [mouseX, mouseY] = mouseXY(event);
         setXrange([xRange[0], mouseX]);
         setYrange([yRange[0], mouseY]);
+        setIsRendered(false);
       }}
       onMouseMove={(event) => {
         const [mouseX, mouseY] = mouseXY(event);
