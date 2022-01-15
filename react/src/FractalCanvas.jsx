@@ -56,6 +56,7 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
 
   const [mousePosX, setMousePosX] = useState();
   const [mousePosY, setMousePosY] = useState();
+  const [mouseClickPos, setMouseClickPos] = useState();
 
   const [isRendered, setIsRendered] = useState(false);
   const [previewImgData, setPreviewImgData] = useState();
@@ -159,13 +160,21 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
         height={height}
         onMouseDown={(event) => {
           const [mouseX, mouseY] = mouseXY(event);
-          setXrange([mouseX, xRange[1]]);
-          setYrange([mouseY, yRange[1]]);
+          setMouseClickPos([mouseX, mouseY]);
         }}
         onMouseUp={(event) => {
           const [mouseX, mouseY] = mouseXY(event);
-          setXrange([xRange[0], mouseX]);
-          setYrange([yRange[0], mouseY]);
+          const [mouseDownX, mouseDownY] = mouseClickPos;
+          if (mouseX < mouseDownX) {
+            setXrange([mouseX, mouseDownX]);
+          } else {
+            setXrange([mouseDownX, mouseX]);
+          }
+          if (mouseY < mouseDownY) {
+            setYrange([mouseY, mouseDownY]);
+          } else {
+            setYrange([mouseDownY, mouseY]);
+          }
           setIsRendered(false);
         }}
         onMouseMove={(event) => {
