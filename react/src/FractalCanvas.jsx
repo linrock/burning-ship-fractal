@@ -55,7 +55,6 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
   const [previewImgData, setPreviewImgData] = useState();
 
   const canvasElRef = useRef();
-  const imgPreviewElRef = useRef();
 
   // track the actual width and height of the canvas DOM element
   useEffect(() => {
@@ -91,7 +90,7 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
         });
       });
     });
-  }, [canvasElRef, xRange, yRange]);
+  }, [canvasElRef, xRange, yRange, colorFunc]);
 
   // listen for a "render" event, unlisten, then render the canvas
   useEffect(() => {
@@ -126,7 +125,10 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
 
   return <figure>
     <div className="image-container">
-      {isRendered || <img src={previewImgData} style={{ width: '100%' }}/>}
+      {isRendered ||
+        <img src={previewImgData} style={{ width: '100%' }}
+             alt="burning ship fractal"
+        />}
       <canvas ref={canvasElRef}
         width={width}
         height={height}
