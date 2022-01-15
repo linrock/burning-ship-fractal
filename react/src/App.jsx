@@ -12,9 +12,7 @@ const App = () => (
         height={1000}
         xRange={[-1.95, -1.45]}
         yRange={[-0.09, 0.02]}
-        colorFunc={(iteration, mu) => {
-          return [ 255, mu * 7, 0, mu * 15 ];
-        }}
+        colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
       />
     </header>
 
@@ -46,9 +44,7 @@ const App = () => (
         height={1600}
         xRange={[-1.8, -1.7]}
         yRange={[-0.08, 0.01]}
-        colorFunc={(iteration) => {
-          return [ 255, iteration * 7, 0, iteration * 15 ];
-        }}
+        colorFunc={(iteration) => [ 255, iteration * 7, 0, iteration * 15 ]}
       />
 
       <p>
@@ -62,9 +58,7 @@ const App = () => (
         height={1600}
         xRange={[-1.8, -1.7]}
         yRange={[-0.08, 0.01]}
-        colorFunc={(iteration, mu) => {
-          return [ 255, mu * 7, 0, mu * 15 ];
-        }}
+        colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
       />
 
       <p>A zoomed-out view of the fractal space</p>
@@ -73,9 +67,7 @@ const App = () => (
         height={600}
         xRange={[-2.5, 1.5]}
         yRange={[-2, 1.0]}
-        colorFunc={(iteration, mu) => {
-          return [ 255, mu * 7, 0, mu * 15 ];
-        }}
+        colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
       />
 
       <p>Zooming in closer to the ships</p>
@@ -84,9 +76,7 @@ const App = () => (
         height={600}
         xRange={[-1.81, -1.39]}
         yRange={[-0.32, 0.03]}
-        colorFunc={(iteration, mu) => {
-          return [ 255, mu * 7, 0, mu * 15 ];
-        }}
+        colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
       />
 
       <p>Zoomed in to one of the smaller ships near -1.57</p>
@@ -95,9 +85,7 @@ const App = () => (
         height={2400}
         xRange={[-1.5805, -1.563]}
         yRange={[-0.0405, 0.0057]}
-        colorFunc={(iteration, mu) => {
-          return [ 255, mu * 6, 0, mu * 15 ];
-        }}
+        colorFunc={(iteration, mu) => [ 255, mu * 6, 0, mu * 15 ]}
       />
 
       <p>Zoomed in to an even smaller ship near -1.94</p>
@@ -106,9 +94,7 @@ const App = () => (
         height={1200}
         xRange={[-1.948, -1.925]}
         yRange={[-0.0095,  0.002]}
-        colorFunc={(iteration, mu) => {
-          return [ 255, mu * 8, 0, mu * 20 ];
-        }}
+        colorFunc={(iteration, mu) => [ 255, mu * 8, 0, mu * 20 ]}
       />
     </div>
 
