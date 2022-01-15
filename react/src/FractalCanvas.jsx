@@ -60,7 +60,11 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
     const canvasEl = canvasElRef.current;
     setActualWidth(canvasEl.offsetWidth);
     setActualHeight(canvasEl.offsetHeight);
-    console.log(`canvas size is (${canvasEl.offsetWidth}, ${canvasEl.offsetHeight})`);
+    console.log(`canvas changed
+  el size: (${canvasEl.offsetWidth}, ${canvasEl.offsetHeight})
+  xRange: (${xRange})
+  yRange: (${yRange})
+    `);
   }, [canvasElRef, xRange, yRange, colorFunc]);
 
   useEffect(() => {
@@ -81,25 +85,35 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
       width={width}
       height={height}
       onMouseDown={(event) => {
-        const x0 =
+        const mouseX =
           xRange[0] * (1 - event.clientX / actualWidth) +
           xRange[1] * (event.clientX / actualWidth);
-        const y0 =
+        const mouseY =
           yRange[0] * (1 - event.clientY / actualHeight) +
           yRange[1] * (event.clientY / actualHeight);
-        setXrange([x0, xRange[1]]);
-        setYrange([y0, yRange[1]]);
+        setXrange([mouseX, xRange[1]]);
+        setYrange([mouseY, yRange[1]]);
       }}
-      onMouseMove={(event) => {
-        const x =
+      onMouseUp={(event) => {
+        const mouseX =
           xRange[0] * (1 - event.clientX / actualWidth) +
           xRange[1] * (event.clientX / actualWidth);
-        const y =
+        const mouseY =
+          yRange[0] * (1 - event.clientY / actualHeight) +
+          yRange[1] * (event.clientY / actualHeight);
+        setXrange([xRange[0], mouseX]);
+        setYrange([yRange[0], mouseY]);
+      }}
+      onMouseMove={(event) => {
+        const mouseX =
+          xRange[0] * (1 - event.clientX / actualWidth) +
+          xRange[1] * (event.clientX / actualWidth);
+        const mouseY =
           yRange[0] * (1 - event.clientY / actualHeight) +
           yRange[1] * (event.clientY / actualHeight);
         // console.log(`(${x.toPrecision(4)}, ${y.toPrecision(4)})`);
-        setMousePosX(x.toPrecision(4));
-        setMousePosY(y.toPrecision(4));
+        setMousePosX(mouseX.toPrecision(4));
+        setMousePosY(mouseY.toPrecision(4));
       }}
       onMouseLeave={() => {
         setMousePosX(null);
