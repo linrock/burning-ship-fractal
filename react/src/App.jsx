@@ -67,7 +67,7 @@ const App = () => (
         width={1600}
         height={1600}
         xRange={[-1.8, -1.7]}
-        yRange={[-0.08, 0.01]}
+        yRange={[-0.09, 0.02]}
         colorFunc={(iteration, modulusSq) => {
           const mu = getMu(iteration, modulusSq);
           return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
