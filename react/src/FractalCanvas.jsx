@@ -17,10 +17,10 @@ function iterateUntilEscape(x0, y0) {
   return [iteration, x * x + y * y];
 }
 
-function drawCanvas(canvas, xRange, yRange, colorFunc) {
-  const canvasWidth = canvas.width;
-  const canvasHeight = canvas.height;
-  const context = canvas.getContext('2d');
+function drawCanvas(canvasEl, xRange, yRange, colorFunc) {
+  const canvasWidth = canvasEl.width;
+  const canvasHeight = canvasEl.height;
+  const context = canvasEl.getContext('2d');
   const canvasImageData = context.createImageData(canvasWidth, canvasHeight);
   const image = canvasImageData.data;
   for (let i = 0; i < canvasHeight; i++) {
@@ -55,12 +55,12 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
 
   const canvasElRef = useRef();
   useEffect(() => {
-    const canvas = canvasElRef.current;
-    console.log(`canvas width is ${canvasElRef.current.offsetWidth}`);
-    setActualWidth(canvas.offsetWidth);
-    setActualHeight(canvas.offsetHeight);
-    drawCanvas(canvas, xRange, yRange, colorFunc);
-  }, [canvasElRef.current, xRange, yRange, colorFunc]);
+    const canvasEl = canvasElRef.current;
+    setActualWidth(canvasEl.offsetWidth);
+    setActualHeight(canvasEl.offsetHeight);
+    console.log(`canvas size is (${canvasEl.offsetWidth}, ${canvasEl.offsetHeight})`);
+    drawCanvas(canvasEl, xRange, yRange, colorFunc);
+  }, [canvasElRef, xRange, yRange, colorFunc]);
 
   return <figure>
     <canvas ref={canvasElRef}
