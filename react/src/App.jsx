@@ -1,7 +1,10 @@
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
 import { shadesOfPurple } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 import { FractalCanvas } from './FractalCanvas';
+
+SyntaxHighlighter.registerLanguage('javascript', js);
 
 const App = () => (
   <>
