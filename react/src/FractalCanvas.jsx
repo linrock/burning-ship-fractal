@@ -22,7 +22,7 @@ function getMu(iteration, modulusSq) {
   return iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
 }
 
-function drawCanvas(canvasEl, xRange, yRange, colorFunc) {
+function drawBurningShipFractal(canvasEl, xRange, yRange, colorFunc) {
   const canvasWidth = canvasEl.width;
   const canvasHeight = canvasEl.height;
   const context = canvasEl.getContext('2d');
@@ -79,19 +79,19 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
     previewCanvasEl.width = actualWidth / 8;
     previewCanvasEl.height = actualHeight / 8;
     requestAnimationFrame(() => {
-      drawCanvas(previewCanvasEl, xRange, yRange, colorFunc);
+      drawBurningShipFractal(previewCanvasEl, xRange, yRange, colorFunc);
       setPreviewImgData(previewCanvasEl.toDataURL('image/png'));
 
       previewCanvasEl.width = actualWidth / 4;
       previewCanvasEl.height = actualHeight / 4;
       requestAnimationFrame(() => {
-        drawCanvas(previewCanvasEl, xRange, yRange, colorFunc);
+        drawBurningShipFractal(previewCanvasEl, xRange, yRange, colorFunc);
         setPreviewImgData(previewCanvasEl.toDataURL('image/png'));
 
         previewCanvasEl.width = actualWidth / 2;
         previewCanvasEl.height = actualHeight / 2;
         requestAnimationFrame(() => {
-          drawCanvas(previewCanvasEl, xRange, yRange, colorFunc);
+          drawBurningShipFractal(previewCanvasEl, xRange, yRange, colorFunc);
           setPreviewImgData(previewCanvasEl.toDataURL('image/png'));
         });
       });
@@ -116,7 +116,7 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
         console.log('not rendered yet! rendering...');
         // render the full-quality canvas
         requestAnimationFrame(() => {
-          drawCanvas(canvasEl, xRange, yRange, colorFunc);
+          drawBurningShipFractal(canvasEl, xRange, yRange, colorFunc);
           setIsRendered(true);
         });
       }
@@ -124,6 +124,16 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
     canvasEl.addEventListener('render', renderListener);
   }, [canvasElRef, isRendered, xRange, yRange, colorFunc]);
 
+  // listen for an event with coordinates to render
+  useEffect(() => {
+    const canvasEl = canvasElRef.current;
+    canvasEl.addEventListener('force-render', (event) => {
+      console.dir(event);
+      requestAnimationFrame(() => {
+        // drawBurningShipFractal(canvasEl, xRange, yRange, colorFunc);
+      });
+    });
+  }, [canvasElRef, colorFunc]);
 
   // for calculating mouse (x, y) positions over the canvas relative to actual size
   const mouseXY = (event) => {
