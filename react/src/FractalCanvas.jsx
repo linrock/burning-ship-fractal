@@ -53,14 +53,28 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
   const [mousePosX, setMousePosX] = useState();
   const [mousePosY, setMousePosY] = useState();
 
+  const [isRendered, setIsRendered] = useState(false);
+
   const canvasElRef = useRef();
   useEffect(() => {
     const canvasEl = canvasElRef.current;
     setActualWidth(canvasEl.offsetWidth);
     setActualHeight(canvasEl.offsetHeight);
     console.log(`canvas size is (${canvasEl.offsetWidth}, ${canvasEl.offsetHeight})`);
-    drawCanvas(canvasEl, xRange, yRange, colorFunc);
   }, [canvasElRef, xRange, yRange, colorFunc]);
+
+  useEffect(() => {
+    const canvasEl = canvasElRef.current;
+    const renderListener = () => {
+      if (!isRendered) {
+        console.log('not rendered yet! rendering...');
+        canvasEl.removeEventListener('render', renderListener);
+        setIsRendered(true);
+        drawCanvas(canvasEl, xRange, yRange, colorFunc);
+      }
+    };
+    canvasEl.addEventListener('render', renderListener);
+  }, [canvasElRef, isRendered]);
 
   return <figure>
     <canvas ref={canvasElRef}
