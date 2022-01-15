@@ -69,6 +69,7 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
   xRange: (${xRange})
   yRange: (${yRange})
     `);
+    // render a low-quality preview early on
     const previewCanvasEl = document.createElement('canvas');
     previewCanvasEl.width = actualWidth / 10;
     previewCanvasEl.height = actualHeight / 10;
@@ -78,13 +79,14 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
     });
   }, [canvasElRef, xRange, yRange]);
 
-  // listen for a "render" event, render the canvas, then unlisten
+  // listen for a "render" event, unlisten, then render the canvas
   useEffect(() => {
     const canvasEl = canvasElRef.current;
     const renderListener = () => {
       canvasEl.removeEventListener('render', renderListener);
       if (!isRendered) {
         console.log('not rendered yet! rendering...');
+        // render the full-quality canvas
         requestAnimationFrame(() => {
           drawCanvas(canvasEl, xRange, yRange, colorFunc);
           setIsRendered(true);
@@ -97,18 +99,20 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
 
   // for calculating mouse (x, y) positions over the canvas relative to actual size
   const mouseXY = (event) => {
-    const X = (event.pageX - event.target.offsetLeft);
-    const Y = (event.pageY - event.target.offsetTop);
-    // console.dir(event);
+    // hack: parentNode for .image-container offsetLeft and offsetTop
+    const X = (event.pageX - event.target.parentNode.offsetLeft);
+    const Y = (event.pageY - event.target.parentNode.offsetTop);
     // console.log(`(${X}, ${Y})`);
-    const mouseX = xRange[0] * (1 - X / actualWidth) + xRange[1] * (X / actualWidth);
-    const mouseY = yRange[0] * (1 - Y / actualHeight) + yRange[1] * (Y / actualHeight);
+    const Xscaled = X / actualWidth;
+    const Yscaled = Y / actualHeight;
+    const mouseX = xRange[0]*(1 - Xscaled) + xRange[1]*Xscaled;
+    const mouseY = yRange[0]*(1 - Yscaled) + yRange[1]*Yscaled;
     return [mouseX, mouseY];
   }
 
   return <figure>
     <div className="image-container">
-      <img src={previewImgData} style={{ width: '100%', display: isRendered ? 'none': 'block' }}/>
+      {isRendered || <img src={previewImgData} style={{ width: '100%' }}/>}
       <canvas ref={canvasElRef}
         width={width}
         height={height}
