@@ -3,11 +3,6 @@ import { shadesOfPurple } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 import { FractalCanvas } from './FractalCanvas';
 
-function getMu(iteration, modulusSq) {
-  // https://mathr.co.uk/helm/AtTheHelmOfTheBurningShip-Paper.pdf
-  return iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
-}
-
 const App = () => (
   <>
     <header className="App-header">
@@ -17,8 +12,7 @@ const App = () => (
         height={1000}
         xRange={[-1.95, -1.45]}
         yRange={[-0.09, 0.02]}
-        colorFunc={(iteration, modulusSq) => {
-          const mu = getMu(iteration, modulusSq);
+        colorFunc={(iteration, mu) => {
           return [ 255, mu * 7, 0, mu * 15 ];
         }}
       />
@@ -52,7 +46,7 @@ const App = () => (
         height={1600}
         xRange={[-1.8, -1.7]}
         yRange={[-0.08, 0.01]}
-        colorFunc={(iteration, modulusSq) => {
+        colorFunc={(iteration) => {
           return [ 255, iteration * 7, 0, iteration * 15 ];
         }}
       />
@@ -68,8 +62,7 @@ const App = () => (
         height={1600}
         xRange={[-1.8, -1.7]}
         yRange={[-0.08, 0.01]}
-        colorFunc={(iteration, modulusSq) => {
-          const mu = getMu(iteration, modulusSq);
+        colorFunc={(iteration, mu) => {
           return [ 255, mu * 7, 0, mu * 15 ];
         }}
       />
@@ -80,8 +73,7 @@ const App = () => (
         height={600}
         xRange={[-2.5, 1.5]}
         yRange={[-2, 1.0]}
-        colorFunc={(iteration, modulusSq) => {
-          const mu = getMu(iteration, modulusSq);
+        colorFunc={(iteration, mu) => {
           return [ 255, mu * 7, 0, mu * 15 ];
         }}
       />
@@ -92,8 +84,7 @@ const App = () => (
         height={600}
         xRange={[-1.81, -1.39]}
         yRange={[-0.32, 0.03]}
-        colorFunc={(iteration, modulusSq) => {
-          const mu = getMu(iteration, modulusSq);
+        colorFunc={(iteration, mu) => {
           return [ 255, mu * 7, 0, mu * 15 ];
         }}
       />
@@ -104,8 +95,7 @@ const App = () => (
         height={2400}
         xRange={[-1.5805, -1.563]}
         yRange={[-0.0405, 0.0057]}
-        colorFunc={(iteration, modulusSq) => {
-          const mu = getMu(iteration, modulusSq);
+        colorFunc={(iteration, mu) => {
           return [ 255, mu * 6, 0, mu * 15 ];
         }}
       />
@@ -116,8 +106,7 @@ const App = () => (
         height={1200}
         xRange={[-1.948, -1.925]}
         yRange={[-0.0095,  0.002]}
-        colorFunc={(iteration, modulusSq) => {
-          const mu = getMu(iteration, modulusSq);
+        colorFunc={(iteration, mu) => {
           return [ 255, mu * 8, 0, mu * 20 ];
         }}
       />

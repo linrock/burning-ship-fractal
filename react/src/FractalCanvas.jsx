@@ -17,6 +17,11 @@ function iterateUntilEscape(x0, y0) {
   return [iteration, x * x + y * y];
 }
 
+function getMu(iteration, modulusSq) {
+  // https://mathr.co.uk/helm/AtTheHelmOfTheBurningShip-Paper.pdf
+  return iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
+}
+
 function drawCanvas(canvasEl, xRange, yRange, colorFunc) {
   const canvasWidth = canvasEl.width;
   const canvasHeight = canvasEl.height;
@@ -30,7 +35,8 @@ function drawCanvas(canvasEl, xRange, yRange, colorFunc) {
       const [numIterations, escapeDistSq] = iterateUntilEscape(x0, y0);
       const ind = i * canvasWidth * 4 + j * 4;
       if (numIterations !== MAX_ITERATIONS) {
-        const pixels = colorFunc(numIterations, escapeDistSq);
+        const mu = getMu(numIterations, escapeDistSq);
+        const pixels = colorFunc(numIterations, mu);
         for (let p = 0; p < 4; p++) {
           image[ind + p] = pixels[p];
         }
