@@ -74,7 +74,7 @@ const App = () => (
         }}
       />
 
-      <p>The zoomed-out view of the fractal space</p>
+      <p>A zoomed-out view of the fractal space</p>
       <FractalCanvas id="bsf-world-overview"
         width={800}
         height={600}

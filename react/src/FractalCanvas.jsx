@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 const MAX_ITERATIONS = 255;
 const ESCAPE_THRESHOLD = 16;
 
-/** Until escape or exceeding the max # of iterations */
+/** Iterate until escape (diverges) or exceeding the max # of iterations */
 function iterateUntilEscape(x0, y0) {
   let x = 0, y = 0;
   let iteration = 0;
@@ -17,47 +17,64 @@ function iterateUntilEscape(x0, y0) {
   return [iteration, x * x + y * y];
 }
 
-export function FractalCanvas({ width, height, xRange, yRange, colorFunc }) {
-  const canvasElRef = useRef();
+function drawCanvas(canvas, xRange, yRange, colorFunc) {
+  const canvasWidth = canvas.width;
+  const canvasHeight = canvas.height;
+  const context = canvas.getContext('2d');
+  const canvasImageData = context.createImageData(canvasWidth, canvasHeight);
+  const image = canvasImageData.data;
+  for (let i = 0; i < canvasHeight; i++) {
+    for (let j = 0; j < canvasWidth; j++) {
+      const x0 = xRange[0] + j * (xRange[1] - xRange[0]) / canvasWidth;
+      const y0 = yRange[0] + i * (yRange[1] - yRange[0]) / canvasHeight;
+      const [numIterations, escapeDistSq] = iterateUntilEscape(x0, y0);
+      const ind = i * canvasWidth * 4 + j * 4;
+      if (numIterations !== MAX_ITERATIONS) {
+        const pixels = colorFunc(numIterations, escapeDistSq);
+        for (let p = 0; p < 4; p++) {
+          image[ind + p] = pixels[p];
+        }
+      }
+    }
+  }
+  requestAnimationFrame(() => {
+    context.putImageData(canvasImageData, 0, 0);
+  });
+}
+
+/** Interactive canvas that draws burning ship fractals */
+export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRangeInit, colorFunc }) {
+  const [xRange, setXrange] = useState(xRangeInit);
+  const [yRange, setYrange] = useState(yRangeInit);
+
   const [actualWidth, setActualWidth] = useState();
   const [actualHeight, setActualHeight] = useState();
 
   const [mousePosX, setMousePosX] = useState();
   const [mousePosY, setMousePosY] = useState();
 
+  const canvasElRef = useRef();
   useEffect(() => {
     const canvas = canvasElRef.current;
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
     console.log(`canvas width is ${canvasElRef.current.offsetWidth}`);
     setActualWidth(canvas.offsetWidth);
     setActualHeight(canvas.offsetHeight);
-
-    const context = canvas.getContext('2d');
-    const canvasImageData = context.createImageData(canvasWidth, canvasHeight);
-    const image = canvasImageData.data;
-    for (let i = 0; i < canvasHeight; i++) {
-      for (let j = 0; j < canvasWidth; j++) {
-        const x0 = xRange[0] + j * (xRange[1] - xRange[0]) / canvasWidth;
-        const y0 = yRange[0] + i * (yRange[1] - yRange[0]) / canvasHeight;
-        const [numIterations, escapeDistSq] = iterateUntilEscape(x0, y0);
-        const ind = i * canvasWidth * 4 + j * 4;
-        if (numIterations !== MAX_ITERATIONS) {
-          const pixels = colorFunc(numIterations, escapeDistSq);
-          for (let p = 0; p < 4; p++) {
-            image[ind + p] = pixels[p];
-          }
-        }
-      }
-    }
-    requestAnimationFrame(() => {
-      context.putImageData(canvasImageData, 0, 0);
-    });
-  }, [canvasElRef.current]);
+    drawCanvas(canvas, xRange, yRange, colorFunc);
+  }, [canvasElRef.current, xRange, yRange, colorFunc]);
 
   return <figure>
     <canvas width={width} height={height}
       ref={canvasElRef}
+      onMouseDown={(event) => {
+        const x0 =
+          xRange[0] * (1 - event.clientX / actualWidth) +
+          xRange[1] * (event.clientX / actualWidth);
+        const y0 =
+          yRange[0] * (1 - event.clientY / actualHeight) +
+          yRange[1] * (event.clientY / actualHeight);
+        setXrange([x0, xRange[1]]);
+        setYrange([y0, yRange[1]]);
+      }}
       onMouseMove={(event) => {
         const x =
           xRange[0] * (1 - event.clientX / actualWidth) +
@@ -75,7 +92,7 @@ export function FractalCanvas({ width, height, xRange, yRange, colorFunc }) {
     <figcaption>
       x [{xRange[0]}, {xRange[1]}] <br/>
       y [{yRange[0]}, {yRange[1]}] <br/>
-      ({mousePosX}, {mousePosY})
+      {(mousePosX && mousePosY) ? `(${mousePosX}, ${mousePosY})` : '.'}
     </figcaption>
   </figure>;
 }
