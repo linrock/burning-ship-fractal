@@ -1,3 +1,6 @@
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { shadesOfPurple } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
 import { FractalCanvas } from './FractalCanvas';
 
 function getMu(iteration, modulusSq) {
@@ -110,7 +113,7 @@ const App = () => (
 
     <div className="container">
       <p>The number of iterations is determined by this equation:</p>
-      <pre>{`
+      <SyntaxHighlighter language="javascript" style={shadesOfPurple}>{`
 const ESCAPE_THRESHOLD = 4;
 const MAX_ITERATIONS = 255;
 
@@ -128,7 +131,7 @@ function iterateUntilEscape(x0, y0) {
   }
   return [iteration, x*x + y*y];
 }
-`.trim()}</pre>
+`.trim()}</SyntaxHighlighter>
     </div>
   </>
 );
