@@ -63,8 +63,9 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
   }, [canvasElRef.current, xRange, yRange, colorFunc]);
 
   return <figure>
-    <canvas width={width} height={height}
-      ref={canvasElRef}
+    <canvas ref={canvasElRef}
+      width={width}
+      height={height}
       onMouseDown={(event) => {
         const x0 =
           xRange[0] * (1 - event.clientX / actualWidth) +
@@ -87,7 +88,8 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
         setMousePosY(y.toPrecision(4));
       }}
       onMouseLeave={() => {
-        console.log('the mouse left');
+        setMousePosX(null);
+        setMousePosY(null);
       }}></canvas>
     <figcaption>
       x [{xRange[0]}, {xRange[1]}] <br/>
