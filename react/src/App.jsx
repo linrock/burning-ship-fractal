@@ -19,7 +19,7 @@ const App = () => (
         yRange={[-0.09, 0.02]}
         colorFunc={(iteration, modulusSq) => {
           const mu = getMu(iteration, modulusSq);
-          return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
+          return [ 255, mu * 7, 0, mu * 15 ];
         }}
       />
     </header>
@@ -53,7 +53,7 @@ const App = () => (
         xRange={[-1.8, -1.7]}
         yRange={[-0.08, 0.01]}
         colorFunc={(iteration, modulusSq) => {
-          return [ 255, ~~(iteration * 7), 0, ~~(iteration * 15) ];
+          return [ 255, iteration * 7, 0, iteration * 15 ];
         }}
       />
 
@@ -70,7 +70,7 @@ const App = () => (
         yRange={[-0.09, 0.02]}
         colorFunc={(iteration, modulusSq) => {
           const mu = getMu(iteration, modulusSq);
-          return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
+          return [ 255, mu * 7, 0, mu * 15 ];
         }}
       />
 
@@ -82,7 +82,7 @@ const App = () => (
         yRange={[-2, 1.0]}
         colorFunc={(iteration, modulusSq) => {
           const mu = getMu(iteration, modulusSq);
-          return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
+          return [ 255, mu * 7, 0, mu * 15 ];
         }}
       />
 
@@ -94,7 +94,7 @@ const App = () => (
         yRange={[-0.0405, 0.0057]}
         colorFunc={(iteration, modulusSq) => {
           const mu = getMu(iteration, modulusSq);
-          return [ 255, ~~(mu * 6), 0, ~~(mu * 15) ];
+          return [ 255, mu * 6, 0, mu * 15 ];
         }}
       />
 
@@ -106,7 +106,7 @@ const App = () => (
         yRange={[-0.0095,  0.002]}
         colorFunc={(iteration, modulusSq) => {
           const mu = getMu(iteration, modulusSq);
-          return [ 255, ~~(mu * 8), 0, ~~(mu * 20) ];
+          return [ 255, mu * 8, 0, mu * 20 ];
         }}
       />
     </div>
