@@ -12,8 +12,8 @@ const App = () => (
       <FractalCanvas id="bsf-wide"
         width={4000}
         height={1000}
-        xRange={[-2.0, -1.5]}
-        yRange={[-0.09, 0.01]}
+        xRange={[-1.95, -1.45]}
+        yRange={[-0.09, 0.02]}
         colorFunc={(iteration, modulusSq) => {
           const mu = getMu(iteration, modulusSq);
           return [ 255, ~~(mu * 7), 0, ~~(mu * 15) ];
@@ -97,8 +97,8 @@ const App = () => (
 
       <p>Another one of the smaller ships</p>
       <FractalCanvas
-        width={400}
-        height={300}
+        width={800}
+        height={600}
         xRange={[-1.948, -1.925]}
         yRange={[-0.0095,  0.002]}
         colorFunc={(iteration, modulusSq) => {
