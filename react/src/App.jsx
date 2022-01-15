@@ -67,7 +67,7 @@ const App = () => (
         width={1600}
         height={1600}
         xRange={[-1.8, -1.7]}
-        yRange={[-0.09, 0.02]}
+        yRange={[-0.08, 0.01]}
         colorFunc={(iteration, modulusSq) => {
           const mu = getMu(iteration, modulusSq);
           return [ 255, mu * 7, 0, mu * 15 ];
@@ -86,7 +86,19 @@ const App = () => (
         }}
       />
 
-      <p>Zoomed in to one of the smaller ships</p>
+      <p>Zooming in closer to the ships</p>
+      <FractalCanvas id="bsf-world-ships"
+        width={800}
+        height={600}
+        xRange={[-1.81, -1.39]}
+        yRange={[-0.32, 0.03]}
+        colorFunc={(iteration, modulusSq) => {
+          const mu = getMu(iteration, modulusSq);
+          return [ 255, mu * 7, 0, mu * 15 ];
+        }}
+      />
+
+      <p>Zoomed in to one of the smaller ships near -1.57</p>
       <FractalCanvas
         width={1600}
         height={2400}
@@ -98,7 +110,7 @@ const App = () => (
         }}
       />
 
-      <p>Another one of the smaller ships</p>
+      <p>Zoomed in to an even smaller ship near -1.94</p>
       <FractalCanvas
         width={1600}
         height={1200}
