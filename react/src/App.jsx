@@ -106,7 +106,7 @@ const App = () => (
         yRange={[-0.0095,  0.002]}
         colorFunc={(iteration, modulusSq) => {
           const mu = getMu(iteration, modulusSq);
-          return [ 255, ~~(mu * 10), 0, ~~(mu * 15) ];
+          return [ 255, ~~(mu * 8), 0, ~~(mu * 20) ];
         }}
       />
     </div>
