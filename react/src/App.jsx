@@ -81,6 +81,15 @@ const App = () => <>
       colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
+    <p>The ship near -1.6</p>
+    <FractalCanvas id="bsf-world-ships"
+      width={800}
+      height={800}
+      xRange={[-1.65, -1.58]}
+      yRange={[-0.074, 0.018]}
+      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+    />
+
     <p>Zoomed in to one of the smaller ships near -1.57</p>
     <FractalCanvas
       width={1600}
