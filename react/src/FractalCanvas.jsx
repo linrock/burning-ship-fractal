@@ -81,12 +81,12 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
   }, [canvasElRef, isRendered]);
 
   const mouseXY = (event) => {
-    const mouseX =
-      xRange[0] * (1 - event.clientX / actualWidth) +
-      xRange[1] * (event.clientX / actualWidth);
-    const mouseY =
-      yRange[0] * (1 - event.clientY / actualHeight) +
-      yRange[1] * (event.clientY / actualHeight);
+    const X = (event.pageX - event.target.offsetLeft);
+    const Y = (event.pageY - event.target.offsetTop);
+    // console.dir(event);
+    // console.log(`(${X}, ${Y})`);
+    const mouseX = xRange[0] * (1 - X / actualWidth) + xRange[1] * (X / actualWidth);
+    const mouseY = yRange[0] * (1 - Y / actualHeight) + yRange[1] * (Y / actualHeight);
     return [mouseX, mouseY];
   }
 
