@@ -92,6 +92,15 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
     });
   }, [canvasElRef, xRange, yRange, colorFunc]);
 
+  useEffect(() => {
+    if (!isRendered) {
+      // clear the canvas so the previous drawing doesn't show through
+      const canvasEl = canvasElRef.current;
+      canvasEl.width = canvasEl.width;
+      canvasEl.height = canvasEl.height;
+    }
+  }, [canvasElRef, isRendered]);
+
   // listen for a "render" event, unlisten, then render the canvas
   useEffect(() => {
     const canvasEl = canvasElRef.current;
