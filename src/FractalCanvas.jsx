@@ -151,7 +151,7 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
 
   return <figure>
     <div className="image-container">
-      {isRendered || <img src={previewImgData} alt="burning ship fractal" />}
+      {(!isRendered && previewImgData) && <img src={previewImgData} alt="burning ship fractal" />}
       <canvas ref={canvasElRef}
         width={width}
         height={height}
