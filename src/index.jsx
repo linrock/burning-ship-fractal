@@ -28,7 +28,7 @@ function renderVisibleFractalCanvasesForever() {
   }, VIZ_POLL_INTERVAL_MS);
 }
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
