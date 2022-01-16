@@ -25,16 +25,16 @@ const App = () => <>
       <p>
         We can explore fractals by putting different starting (x0, y0) numbers
         into the equation and making note of whether the series:
-        <ul>
-          <li>diverges to infinity or stays within a limit</li>
-          <li>if the series diverges, we can look at:
-            <ul>
-              <li>the number of iterations until reaching the escape radius</li>
-              <li>the magnitude of the escape</li>
-            </ul>
-          </li>
-        </ul>
       </p>
+      <ul>
+        <li>diverges to infinity or stays within a limit</li>
+        <li>if the series diverges, we can look at:
+          <ul>
+            <li>the number of iterations until reaching the escape radius</li>
+            <li>the magnitude of the escape</li>
+          </ul>
+        </li>
+      </ul>
     </section>
 
     <p>
@@ -54,7 +54,7 @@ const App = () => <>
     <p>
       A zoomed-out view of the fractal world. The ships that gave this fractal
       its name are located around the real axis (y = 0).
-      </p>
+    </p>
     <FractalCanvas id="bsf-world-overview"
       width={800}
       height={600}
