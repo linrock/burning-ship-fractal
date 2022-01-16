@@ -36,7 +36,7 @@ function drawBurningShipFractal(canvasEl, xRange, yRange, colorFunc) {
       const ind = i * canvasWidth * 4 + j * 4;
       if (numIterations !== MAX_ITERATIONS) {
         const mu = getMu(numIterations, escapeDistSq);
-        const pixels = colorFunc(numIterations, mu);
+        const pixels = colorFunc({ numIterations, mu });
         for (let p = 0; p < 4; p++) {
           image[ind + p] = pixels[p];
         }

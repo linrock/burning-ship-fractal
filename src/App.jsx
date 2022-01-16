@@ -14,7 +14,7 @@ const App = () => <>
       height={1000}
       xRange={[-1.95, -1.45]}
       yRange={[-0.09, 0.02]}
-      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+      colorFunc={({ mu }) => [ 255, mu * 7, 0, mu * 15 ]}
     />
   </header>
 
@@ -67,7 +67,7 @@ const App = () => <>
       height={1600}
       xRange={[-1.8, -1.7]}
       yRange={[-0.08, 0.01]}
-      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+      colorFunc={({ mu }) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
     <h3>World overview</h3>
@@ -80,7 +80,7 @@ const App = () => <>
       height={800}
       xRange={[-2.2, 2.2]}
       yRange={[-2.2, 2.2]}
-      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+      colorFunc={({ mu }) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
     <p>
@@ -92,7 +92,7 @@ const App = () => <>
       height={400}
       xRange={[-2.5, 0.5]}
       yRange={[-1, 0.5]}
-      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+      colorFunc={({ mu }) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
     <p>Zooming in closer to the ships in the bottom left</p>
@@ -101,7 +101,7 @@ const App = () => <>
       height={600}
       xRange={[-1.81, -1.39]}
       yRange={[-0.32, 0.03]}
-      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+      colorFunc={({ mu }) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
     <p>The ship near -1.6 between the largest ship and the dark expanse.</p>
@@ -110,7 +110,7 @@ const App = () => <>
       height={800}
       xRange={[-1.65, -1.58]}
       yRange={[-0.074, 0.018]}
-      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+      colorFunc={({ mu }) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
     <p>Small ships near the edge</p>
@@ -119,7 +119,7 @@ const App = () => <>
       height={400}
       xRange={[-1.59, -1.49]}
       yRange={[-0.052, 0.014]}
-      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+      colorFunc={({ mu }) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
     <p>Zoomed in to the small ship near -1.57</p>
@@ -128,7 +128,7 @@ const App = () => <>
       height={1600}
       xRange={[-1.5805, -1.55]}
       yRange={[-0.04, 0.006]}
-      colorFunc={(iteration, mu) => [ 255, mu * 6, 0, mu * 15 ]}
+      colorFunc={({ mu }) => [ 255, mu * 6, 0, mu * 15 ]}
     />
 
     <p>Small ship and disorder near the expanse.</p>
@@ -137,7 +137,7 @@ const App = () => <>
       height={1600}
       xRange={[-1.529, -1.499]}
       yRange={[-0.06, 0.005]}
-      colorFunc={(iteration, mu) => [ 255, mu * 8, 0, mu * 15 ]}
+      colorFunc={({ mu }) => [ 255, mu * 8, 0, mu * 15 ]}
     />
 
     <p>
@@ -149,7 +149,7 @@ const App = () => <>
       height={600}
       xRange={[-2.04, -1.66]}
       yRange={[-0.142, 0.072]}
-      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+      colorFunc={({ mu }) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
     <p>Zoomed in to a small ship near -1.94</p>
@@ -158,7 +158,7 @@ const App = () => <>
       height={1200}
       xRange={[-1.948, -1.925]}
       yRange={[-0.0095,  0.002]}
-      colorFunc={(iteration, mu) => [ 255, mu * 8, 0, mu * 20 ]}
+      colorFunc={({ mu }) => [ 255, mu * 8, 0, mu * 20 ]}
     />
   </div>
 
@@ -193,7 +193,7 @@ function iterateUntilEscape(x0, y0) {
 
   <div className="container">
     <p>
-      Here's the largest ship in the fractal, colored based on
+      Here's the largest ship colored based on
       iteration count alone.
     </p>
     <FractalCanvas id="bsf-wide"
@@ -201,19 +201,19 @@ function iterateUntilEscape(x0, y0) {
       height={1600}
       xRange={[-1.8, -1.7]}
       yRange={[-0.08, 0.01]}
-      colorFunc={(iteration) => [ 255, iteration * 7, 0, iteration * 15 ]}
+      colorFunc={({ numIterations }) => [ 255, numIterations * 7, 0, numIterations * 15 ]}
     />
     <p>
-      If we consider the escape distance, the resulting
-      image will appear smoother. Here's the same image as above colored
-      with renormalized iteration counts.
+      By factoring in the escape distance, we can use this extra
+      information to smooth the color transitions. Here's the same
+      image as above colored with renormalized iteration counts.
     </p>
     <FractalCanvas id="bsf-wide-2"
       width={1600}
       height={1600}
       xRange={[-1.8, -1.7]}
       yRange={[-0.08, 0.01]}
-      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+      colorFunc={({ mu }) => [ 255, mu * 7, 0, mu * 15 ]}
     />
   </div>
 
@@ -228,7 +228,7 @@ function iterateUntilEscape(x0, y0) {
       height={1600}
       xRange={[-1.7825, -1.765]}
       yRange={[-0.0671, -0.0494]}
-      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+      colorFunc={({ mu }) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
     <FractalCanvas
@@ -236,7 +236,7 @@ function iterateUntilEscape(x0, y0) {
       height={800}
       xRange={[-1.510987, -1.5090825]}
       yRange={[-0.00296972, 0.00066197]}
-      colorFunc={(iteration, mu) => [ 255, mu * 5, 0, 255 ]}
+      colorFunc={({ mu }) => [ 255, mu * 5, 0, 255 ]}
     />
 
     <FractalCanvas
@@ -244,7 +244,7 @@ function iterateUntilEscape(x0, y0) {
       height={800}
       xRange={[-2.01, -1.9469]}
       yRange={[-0.02, 0.02]}
-      colorFunc={(iteration, mu) => [ 255, mu * 12, 0, mu * 30 ]}
+      colorFunc={({ mu }) => [ 255, mu * 12, 0, mu * 30 ]}
     />
   </div>
 </>;
