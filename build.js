@@ -35,6 +35,13 @@ if (!fs.existsSync(OUT_DIR)) {
 
   const dom = new JSDOM(finalHtml);
 
+  // make all images visible on the page
+  dom.window.document.
+    querySelectorAll('img').
+    forEach(async (imgNodeEl) => {
+      imgNodeEl.style.display = 'block';
+    });
+
   // replace local css links with inline css
   /*
   dom.window.document.
