@@ -219,6 +219,9 @@ function iterateUntilEscape(x0, y0) {
 
   <div className="container">
     <h3>Sub-structures</h3>
+    <p>
+      Zoomed-in to various parts of the fractal world.
+    </p>
 
     <FractalCanvas
       width={1600}
