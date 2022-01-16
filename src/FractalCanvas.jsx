@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 const MAX_ITERATIONS = 255;
-const ESCAPE_THRESHOLD = 16;
+const ESCAPE_THRESHOLD = 4;
 
 /** Iterate until escape (diverges) or exceeding the max # of iterations */
 function iterateUntilEscape(x0, y0) {
