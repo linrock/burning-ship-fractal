@@ -18,13 +18,15 @@ if (!fs.existsSync(OUT_DIR)) {
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+  const url = `file://${path.resolve('./build/index.html')}`;
   try {
-    await page.goto(`file://${path.resolve('./build/index.html')}`, {
+    await page.goto(url, {
       waitUntil: 'networkidle2',
       timeout: 5000,
     });
-  } catch {
-    console.error('Error: use `yarn serve` to run the dev server at http://localhost:3000')
+  } catch (error) {
+    console.dir(error);
+    console.error(`Error: failed to snapshot url: ${url}`);
     await browser.close();
     return;
   }
