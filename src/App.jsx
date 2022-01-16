@@ -89,9 +89,9 @@ const App = () => <>
     </p>
     <FractalCanvas id="bsf-world-overview"
       width={800}
-      height={600}
-      xRange={[-2.5, 1.5]}
-      yRange={[-2, 1.0]}
+      height={400}
+      xRange={[-2.5, 0.5]}
+      yRange={[-1, 0.5]}
       colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
@@ -125,9 +125,9 @@ const App = () => <>
     <p>Zoomed in to the small ship near -1.57</p>
     <FractalCanvas
       width={1600}
-      height={2200}
-      xRange={[-1.5805, -1.563]}
-      yRange={[-0.0405, 0.0057]}
+      height={1600}
+      xRange={[-1.5805, -1.55]}
+      yRange={[-0.04, 0.006]}
       colorFunc={(iteration, mu) => [ 255, mu * 6, 0, mu * 15 ]}
     />
 
@@ -139,7 +139,6 @@ const App = () => <>
       yRange={[-0.06, 0.005]}
       colorFunc={(iteration, mu) => [ 255, mu * 8, 0, mu * 15 ]}
     />
-
 
     <p>
       Behind the largest ship are some very small ships. The light ends
