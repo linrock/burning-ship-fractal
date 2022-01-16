@@ -131,7 +131,7 @@ const App = () => <>
       colorFunc={(iteration, mu) => [ 255, mu * 6, 0, mu * 15 ]}
     />
 
-    <p>The small ship near the expanse.</p>
+    <p>Small ship and disorder near the expanse.</p>
     <FractalCanvas
       width={1600}
       height={1600}
@@ -214,6 +214,34 @@ function iterateUntilEscape(x0, y0) {
       xRange={[-1.8, -1.7]}
       yRange={[-0.08, 0.01]}
       colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+    />
+  </div>
+
+  <div className="container">
+    <h3>Sub-structures</h3>
+
+    <FractalCanvas
+      width={1600}
+      height={1600}
+      xRange={[-1.7825, -1.765]}
+      yRange={[-0.0671, -0.0494]}
+      colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
+    />
+
+    <FractalCanvas
+      width={1600}
+      height={800}
+      xRange={[-1.510987, -1.5090825]}
+      yRange={[-0.00296972, 0.00066197]}
+      colorFunc={(iteration, mu) => [ 255, mu * 5, 0, 255 ]}
+    />
+
+    <FractalCanvas
+      width={1600}
+      height={800}
+      xRange={[-2.01, -1.9469]}
+      yRange={[-0.02, 0.02]}
+      colorFunc={(iteration, mu) => [ 255, mu * 12, 0, mu * 30 ]}
     />
   </div>
 </>;
