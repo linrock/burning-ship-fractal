@@ -44,6 +44,42 @@ input[type="text"] {
   font-size: 1rem;
   width: 5rem;
 }
+.equation {
+  font-family: "Times New Roman", serif;
+  font-size: 2rem;
+  font-style: italic;
+  letter-spacing: 0.1rem;
+  background: #111;
+  padding: 1rem 2rem 1.2rem;
+  border-radius: 4px;
+}
+.equation .series-num {
+  width: 2rem;
+  display: inline-block;
+  position: relative;
+}
+.equation .series-eq {
+  width: 3rem;
+  display: inline-block;
+}
+.equation .series-num-wide {
+  width: 4rem;
+}
+.equation .series-super {
+  position: relative;
+}
+.equation sub {
+  position: absolute;
+  top: 1.3rem;
+  left: 1.1rem;
+  font-size: 0.9rem;
+}
+.equation super {
+  position: absolute;
+  top: 0.3rem;
+  left: 1.1rem;
+  font-size: 0.9rem;
+}
 .image-container {
   position: relative;
   display: inline-block;
