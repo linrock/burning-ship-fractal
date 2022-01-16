@@ -44,10 +44,7 @@ const App = () => <>
     </section>
 
     <p>
-      If we consider the magnitude of the escape, the resulting
-      image will appear smoother with the same color palette.
-      Here's the largest ship colored with renormalized
-      iteration counts.
+      The largest ship is located on the real axis at -1.75.
     </p>
     <FractalCanvas id="bsf-wide-2"
       width={1600}
@@ -58,19 +55,21 @@ const App = () => <>
     />
 
     <p>
-      A zoomed-out view of the fractal world. Radius of 2.
+      A zoomed-out view of the fractal world. If we consider an escape radius
+      of 2, the world also has a radius of 2, since any points starting outside
+      of the world diverge right away.
     </p>
     <FractalCanvas id="bsf-world-overview"
       width={800}
       height={800}
-      xRange={[-2, 2]}
-      yRange={[-2, 2]}
+      xRange={[-2.2, 2.2]}
+      yRange={[-2.2, 2.2]}
       colorFunc={(iteration, mu) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
     <p>
-      A zoomed-out view of the fractal world. The ships that gave this fractal
-      its name are located around the real axis (y = 0).
+      The ships are located around the real axis (y = 0)
+      for x less than -1.5.
     </p>
     <FractalCanvas id="bsf-world-overview"
       width={800}
