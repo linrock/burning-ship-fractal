@@ -35,6 +35,10 @@ h1 {
   position: absolute;
   margin-left: 2rem;
 }
+h3 {
+  font-size: 1.5rem;
+  color: yellow;
+}
 .container {
   width: 640px;
   padding: 0 20px;
