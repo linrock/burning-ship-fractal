@@ -223,9 +223,26 @@ function getColor(numIterations) {
       colorFunc={({ numIterations }) => [ 255, numIterations * 7, 0, numIterations * 15 ]}
     />
     <p>
-      By factoring in the escape distance, we can use this extra
-      information to smooth the color transitions. Here's the same
-      image as above colored with renormalized iteration counts.
+      By considering escape distances on a logarithmic scale, we
+      can use this extra information to smooth the color transitions.
+    </p>
+    <SyntaxHighlighter language="javascript" style={shadesOfPurple}>{`
+const ESCAPE_RADIUS = 2;
+
+function getMu(numIterations, escapeDistance) {
+  return numIterations + 1 -
+    Math.log(
+      Math.log(escapeDistance)) /
+      Math.log(ESCAPE_RADIUS)
+    );
+}
+
+function getColor(mu) {
+  return [ 255, mu * 7, 0, mu * 15 ];
+}
+`.trim()}</SyntaxHighlighter>
+    <p>
+      Here's the same image as above colored with renormalized iteration counts.
     </p>
     <FractalCanvas id="bsf-wide-2"
       width={1600}

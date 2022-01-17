@@ -10,19 +10,19 @@ const LOG_ESCAPE_RADIUS = Math.log(ESCAPE_RADIUS);
 function iterateUntilEscape(x0, y0) {
   let x = 0, y = 0;
   let iteration = 0;
-  while ((x * x + y * y < ESCAPE_THRESHOLD) && (iteration < MAX_ITERATIONS)) {
-    const x_n = x * x - y * y + x0;
-    const y_n = 2 * Math.abs(x * y) + y0;
+  while ((x*x + y*y < ESCAPE_THRESHOLD) && (iteration < MAX_ITERATIONS)) {
+    const x_n = x*x - y*y + x0;
+    const y_n = 2 * Math.abs(x*y) + y0;
     x = x_n;
     y = y_n;
     iteration++;
   }
-  return [iteration, x * x + y * y];
+  return [iteration, Math.sqrt(x*x + y*y)];
 }
 
-function getMu(iteration, modulusSq) {
+function getMu(numIterations, escapeDistance) {
   // https://mathr.co.uk/helm/AtTheHelmOfTheBurningShip-Paper.pdf
-  return iteration + 1 - Math.log(Math.log(Math.sqrt(modulusSq))) / LOG_ESCAPE_RADIUS;
+  return numIterations + 1 - Math.log(Math.log(escapeDistance)) / LOG_ESCAPE_RADIUS;
 }
 
 function drawBurningShipFractal(canvasEl, xRange, yRange, colorFunc) {
@@ -35,10 +35,10 @@ function drawBurningShipFractal(canvasEl, xRange, yRange, colorFunc) {
     for (let j = 0; j < canvasWidth; j++) {
       const x0 = xRange[0] + j * (xRange[1] - xRange[0]) / canvasWidth;
       const y0 = yRange[0] + i * (yRange[1] - yRange[0]) / canvasHeight;
-      const [numIterations, escapeDistSq] = iterateUntilEscape(x0, y0);
+      const [numIterations, escapeDistance] = iterateUntilEscape(x0, y0);
       const ind = i * canvasWidth * 4 + j * 4;
       if (numIterations !== MAX_ITERATIONS) {
-        const mu = getMu(numIterations, escapeDistSq);
+        const mu = getMu(numIterations, escapeDistance);
         const pixels = colorFunc({ numIterations, mu });
         for (let p = 0; p < 4; p++) {
           image[ind + p] = pixels[p];
