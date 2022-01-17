@@ -26,14 +26,8 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
     const actualHeight = canvasEl.offsetHeight;
     setActualWidth(actualWidth);
     setActualHeight(actualHeight);
-    /*
-    console.log(`canvas changed
-  el size: (${actualWidth}, ${actualHeight})
-  xRange: (${xRange})
-  yRange: (${yRange})
-    `);
-    */
-    // render a low-quality preview early on
+
+    // render a low-quality preview early while the full-res canvas is being rendered
     const previewCanvasEl = document.createElement('canvas');
     previewCanvasEl.width = actualWidth / 8;
     previewCanvasEl.height = actualHeight / 8;

@@ -2,7 +2,7 @@ const MAX_ITERATIONS = 255;
 const ESCAPE_RADIUS = 2;
 
 const ESCAPE_THRESHOLD = ESCAPE_RADIUS * ESCAPE_RADIUS;
-const LOG_ESCAPE_RADIUS = Math.log(ESCAPE_RADIUS);
+// const LOG_ESCAPE_RADIUS = Math.log(ESCAPE_RADIUS);
 
 /** Iterate until escape (diverges) or exceeding the max # of iterations */
 function iterateUntilEscape(x0, y0) {
@@ -18,7 +18,7 @@ function iterateUntilEscape(x0, y0) {
   return [iteration, Math.sqrt(x*x + y*y)];
 }
 
-/** re-normalized iteration count */
+/** re-normalized iteration count for smoother images */
 function getMu(numIterations, escapeDistance) {
   // https://mathr.co.uk/helm/AtTheHelmOfTheBurningShip-Paper.pdf
   // log base 2 assumes an escape radius of 2
