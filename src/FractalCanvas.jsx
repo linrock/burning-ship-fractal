@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
 const MAX_ITERATIONS = 255;
-const ESCAPE_THRESHOLD = 4;
+const ESCAPE_RADIUS = 2;
+
+const ESCAPE_THRESHOLD = ESCAPE_RADIUS * ESCAPE_RADIUS;
+const LOG_ESCAPE_RADIUS = Math.log(ESCAPE_RADIUS);
 
 /** Iterate until escape (diverges) or exceeding the max # of iterations */
 function iterateUntilEscape(x0, y0) {
@@ -19,7 +22,7 @@ function iterateUntilEscape(x0, y0) {
 
 function getMu(iteration, modulusSq) {
   // https://mathr.co.uk/helm/AtTheHelmOfTheBurningShip-Paper.pdf
-  return iteration + 1 - Math.log2(Math.log(Math.sqrt(modulusSq)));
+  return iteration + 1 - Math.log(Math.log(Math.sqrt(modulusSq))) / LOG_ESCAPE_RADIUS;
 }
 
 function drawBurningShipFractal(canvasEl, xRange, yRange, colorFunc) {
