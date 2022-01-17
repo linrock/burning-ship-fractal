@@ -171,35 +171,49 @@ const App = () => <>
     <h3>Fractal coloring</h3>
 
     <p>
-      Given a starting point (x0, y0), we can calculate the number of
-      iterations it takes for the series to diverge, and the distance
-      from zero when escaping.
+      Escape time: given a starting point (x0, y0), we can give each
+      point a color by calculating the number of iterations it takes
+      for the series to diverge, and the distance from zero when escaping.
     </p>
     <SyntaxHighlighter language="javascript" style={shadesOfPurple}>{`
 const ESCAPE_THRESHOLD = 4;
 const MAX_ITERATIONS = 255;
 
 function iterateUntilEscape(x0, y0) {
-  let x = 0;
-  let y = 0;
-  let iteration = 0;
+  let x = 0, y = 0;
+  let numIterations = 0;
   while ((x*x + y*y < ESCAPE_THRESHOLD) &&
-         (iteration &lt; MAX_ITERATIONS)) {
+         (numIterations < MAX_numIterationsS)) {
     const x_next = x*x - y*y + x0;
     const y_next = 2*Math.abs(x*y) + y0;
     x = x_next;
     y = y_next;
-    iteration++;
+    numIterations++;
   }
-  return [iteration, x*x + y*y];
+  return [numIterations, x*x + y*y];
 }
 `.trim()}</SyntaxHighlighter>
   </div>
 
   <div className="container">
     <p>
+      We can set the RGBA colors of every pixel in the image based
+      on the number of iterations. Here's an example of a fiery yellow/red
+      color palette by scaling just the green and alpha values.
+    </p>
+    <SyntaxHighlighter language="javascript" style={shadesOfPurple}>{`
+function getColor(numIterations) {
+  return [
+    255,                // red
+    numIterations * 7,  // green
+    0,                  // blue
+    numIterations * 15  // alpha
+  ];
+}
+`.trim()}</SyntaxHighlighter>
+    <p>
       Here's the largest ship colored based on
-      iteration count alone.
+      number of iterations alone.
     </p>
     <FractalCanvas id="bsf-wide"
       width={1600}
