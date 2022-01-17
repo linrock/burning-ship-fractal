@@ -72,6 +72,9 @@ input[type="text"] {
 .equation .series-super {
   position: relative;
 }
+.equation .series-plus {
+  padding: 0 1rem;
+}
 .equation sub {
   position: absolute;
   top: 1.3rem;

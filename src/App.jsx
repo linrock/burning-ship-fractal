@@ -28,12 +28,16 @@ const App = () => <>
       (|Re(
         <span className="series-num">z<sub>n</sub></span>
       )|
-      + i|Im(
+      <span className="series-plus">+</span>
+      i|Im(
         <span className="series-num">z<sub>n</sub></span>
       )|)
       <span className="series-super">
         <super style={{ left: '0.1rem' }}>2</super>
-      </span> + c
+      </span>
+      <span className="series-plus"
+            style={{ paddingLeft: '1.5rem' }}>+</span>
+      c
     </div>
 
     <p>By looking at it the same way as Mandelbrot sets:</p>
@@ -41,7 +45,8 @@ const App = () => <>
       <span className="series-num series-num-wide">z<sub>n+1</sub></span>
       <span className="series-eq">=</span>
       <span className="series-num">z<sub>n</sub><super>2</super></span>
-       + c
+      <span className="series-plus">+</span>
+      c
     </div>
     <section>
       <p>
