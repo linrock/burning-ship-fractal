@@ -22,7 +22,8 @@ function iterateUntilEscape(x0, y0) {
 
 function getMu(numIterations, escapeDistance) {
   // https://mathr.co.uk/helm/AtTheHelmOfTheBurningShip-Paper.pdf
-  return numIterations + 1 - Math.log(Math.log(escapeDistance)) / LOG_ESCAPE_RADIUS;
+  return numIterations + 1 - Math.log2(Math.log(escapeDistance));
+  // return numIterations + 1 - Math.log(Math.log(escapeDistance) / LOG_ESCAPE_RADIUS);
 }
 
 function drawBurningShipFractal(canvasEl, xRange, yRange, colorFunc) {
