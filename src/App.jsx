@@ -27,7 +27,7 @@ const App = () => <>
       <span className="series-eq">=</span>
       (|Re(
         <span className="series-num">z<sub>n</sub></span>
-      )
+      )|
       + i|Im(
         <span className="series-num">z<sub>n</sub></span>
       )|)

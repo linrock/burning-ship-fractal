@@ -75,14 +75,14 @@ input[type="text"] {
 .equation sub {
   position: absolute;
   top: 1.3rem;
-  left: 1.1rem;
-  font-size: 0.9rem;
+  left: 1rem;
+  font-size: 1rem;
 }
 .equation super {
   position: absolute;
-  top: 0.3rem;
+  top: 0.2rem;
   left: 1.1rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 .image-container {
   position: relative;
