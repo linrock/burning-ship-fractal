@@ -187,6 +187,16 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
         onMouseLeave={() => {
           setMousePosX(null);
           setMousePosY(null);
+        }}
+        onWheel={(event) => {
+          // console.log(`wheel! ${event.deltaY}`);
+          event.preventDefault();
+          const wheelDirection = event.deltaY > 0 ? 1 : -1;
+          const xRangeStep = (xRange[1] - xRange[0]) / 10 * wheelDirection;
+          const yRangeStep = (yRange[1] - yRange[0]) / 10 * wheelDirection;
+          setXrange([xRange[0] - xRangeStep, xRange[1] + xRangeStep]);
+          setYrange([yRange[0] - yRangeStep, yRange[1] + yRangeStep]);
+          setIsRendered(false);
         }}>
       </canvas>
     </div>
