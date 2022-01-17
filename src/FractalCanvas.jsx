@@ -132,17 +132,6 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
     canvasEl.addEventListener('render', renderListener);
   }, [canvasElRef, isRendered, xRange, yRange, colorFunc]);
 
-  // listen for an event with coordinates to render
-  useEffect(() => {
-    const canvasEl = canvasElRef.current;
-    canvasEl.addEventListener('force-render', (event) => {
-      console.dir(event);
-      requestAnimationFrame(() => {
-        // drawBurningShipFractal(canvasEl, xRange, yRange, colorFunc);
-      });
-    });
-  }, [canvasElRef, colorFunc]);
-
   // for calculating mouse (x, y) positions over the canvas relative to actual size
   const mouseXY = (event) => {
     // hack: parentNode for .image-container offsetLeft and offsetTop
