@@ -28,6 +28,7 @@ function renderVisibleFractalCanvasesForever() {
   }, VIZ_POLL_INTERVAL_MS);
 }
 
+// entry point
 ReactDOM.hydrate(
   <React.StrictMode>
     <App />
@@ -35,3 +36,6 @@ ReactDOM.hydrate(
   document.getElementById('root')
 );
 renderVisibleFractalCanvasesForever();
+[...document.querySelectorAll('.equation')].forEach((equationEl) => {
+  window.katex.render(equationEl.innerHTML, equationEl);
+});
