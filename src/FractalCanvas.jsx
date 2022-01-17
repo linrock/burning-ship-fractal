@@ -74,11 +74,13 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
     const actualHeight = canvasEl.offsetHeight;
     setActualWidth(actualWidth);
     setActualHeight(actualHeight);
+    /*
     console.log(`canvas changed
   el size: (${actualWidth}, ${actualHeight})
   xRange: (${xRange})
   yRange: (${yRange})
     `);
+    */
     // render a low-quality preview early on
     const previewCanvasEl = document.createElement('canvas');
     previewCanvasEl.width = actualWidth / 8;
@@ -165,8 +167,16 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
           setMouseClickPos([mouseX, mouseY]);
         }}
         onMouseUp={(event) => {
-          const [mouseX, mouseY] = mouseXY(event);
+          const [mouseUpX, mouseUpY] = mouseXY(event);
           const [mouseDownX, mouseDownY] = mouseClickPos;
+
+          // pan the camera view
+          const xPan = mouseDownX - mouseUpX;
+          const yPan = mouseDownY - mouseUpY;
+          setXrange([xRange[0] + xPan, xRange[1] + xPan]);
+          setYrange([yRange[0] + yPan, yRange[1] + yPan]);
+          /*
+          // zoom in to the selected area
           if (mouseX < mouseDownX) {
             setXrange([mouseX, mouseDownX]);
           } else {
@@ -177,6 +187,7 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
           } else {
             setYrange([mouseDownY, mouseY]);
           }
+          */
           setIsRendered(false);
         }}
         onMouseMove={(event) => {
