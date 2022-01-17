@@ -60,7 +60,8 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
 
   const [mousePosX, setMousePosX] = useState();
   const [mousePosY, setMousePosY] = useState();
-  const [mouseClickPos, setMouseClickPos] = useState();
+  const [mouseDownPos, setMouseDownPos] = useState([null, null]);
+  const [mouseClickPos, setMouseClickPos] = useState([null, null]);
 
   const [isRendered, setIsRendered] = useState(false);
   const [previewImgData, setPreviewImgData] = useState();
@@ -163,15 +164,32 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
         width={width}
         height={height}
         onMouseDown={(event) => {
-          const [mouseX, mouseY] = mouseXY(event);
-          setMouseClickPos([mouseX, mouseY]);
+          const [mouseDownX, mouseDownY] = mouseXY(event);
+          setMouseDownPos([mouseDownX, mouseDownY]);
         }}
         onMouseUp={(event) => {
           const [mouseUpX, mouseUpY] = mouseXY(event);
-          const [mouseDownX, mouseDownY] = mouseClickPos;
+          const [mouseDownX, mouseDownY] = mouseDownPos;
           if (mouseUpX === mouseDownX && mouseUpY === mouseDownY) {
-            // todo: enable zooming
-            console.log('mouse click!');
+            const [mouseClickX, mouseClickY] = mouseClickPos;
+            if (mouseClickX == null && mouseClickY === null) {
+              // if no previous click, register the mouse click
+              setMouseClickPos([mouseUpX, mouseUpY]);
+            } else {
+              // zoom in to the selected area
+              setMouseClickPos([null, null]);
+              if (mouseUpX < mouseClickX) {
+                setXrange([mouseUpX, mouseClickX]);
+              } else {
+                setXrange([mouseClickX, mouseUpX]);
+              }
+              if (mouseUpY < mouseClickY) {
+                setYrange([mouseUpY, mouseClickY]);
+              } else {
+                setYrange([mouseClickY, mouseUpY]);
+              }
+              setIsRendered(false);
+            }
             return;
           }
           // pan the camera view
@@ -179,19 +197,6 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
           const yPan = mouseDownY - mouseUpY;
           setXrange([xRange[0] + xPan, xRange[1] + xPan]);
           setYrange([yRange[0] + yPan, yRange[1] + yPan]);
-          /*
-          // zoom in to the selected area
-          if (mouseX < mouseDownX) {
-            setXrange([mouseX, mouseDownX]);
-          } else {
-            setXrange([mouseDownX, mouseX]);
-          }
-          if (mouseY < mouseDownY) {
-            setYrange([mouseY, mouseDownY]);
-          } else {
-            setYrange([mouseDownY, mouseY]);
-          }
-          */
           setIsRendered(false);
         }}
         onMouseMove={(event) => {
