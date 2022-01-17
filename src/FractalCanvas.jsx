@@ -169,7 +169,11 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
         onMouseUp={(event) => {
           const [mouseUpX, mouseUpY] = mouseXY(event);
           const [mouseDownX, mouseDownY] = mouseClickPos;
-
+          if (mouseUpX === mouseDownX && mouseUpY === mouseDownY) {
+            // todo: enable zooming
+            console.log('mouse click!');
+            return;
+          }
           // pan the camera view
           const xPan = mouseDownX - mouseUpX;
           const yPan = mouseDownY - mouseUpY;
