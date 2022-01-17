@@ -35,11 +35,17 @@ if (!fs.existsSync(OUT_DIR)) {
 
   const dom = new JSDOM(finalHtml);
 
-  // make all images visible on the page
+  // make the first 3 images visible on the page.
+  // delete the data in the rest of the pre-rendered images.
   dom.window.document.
     querySelectorAll('img').
-    forEach(async (imgNodeEl) => {
-      imgNodeEl.style.display = 'block';
+    forEach(async (imgNodeEl, i) => {
+      if (i < 3) {
+        imgNodeEl.style.display = 'block';
+      } else {
+        imgNodeEl.style.display = 'none';
+        imgNodeEl.src = '';
+      }
     });
 
   // replace local css links with inline css
