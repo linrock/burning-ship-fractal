@@ -22,7 +22,7 @@ if (!fs.existsSync(OUT_DIR)) {
   try {
     await page.goto(url, {
       waitUntil: 'networkidle2',
-      timeout: 5000,
+      timeout: 10_000,
     });
   } catch (error) {
     console.dir(error);
@@ -34,19 +34,23 @@ if (!fs.existsSync(OUT_DIR)) {
   let finalHtml = `<!DOCTYPE html><html>${await page.evaluate(() => document.documentElement.innerHTML)}</html>`;
 
   const dom = new JSDOM(finalHtml);
-
+  const document = dom.window.document;
   // make the first 3 images visible on the page.
   // delete the data in the rest of the pre-rendered images.
-  dom.window.document.
-    querySelectorAll('img').
-    forEach(async (imgNodeEl, i) => {
-      if (i < 3) {
-        imgNodeEl.style.display = 'block';
-      } else {
-        imgNodeEl.style.display = 'none';
-        imgNodeEl.src = '';
-      }
-    });
+  document.querySelectorAll('img').forEach(async (imgNodeEl, i) => {
+    if (i < 3) {
+      imgNodeEl.style.display = 'block';
+    } else {
+      imgNodeEl.style.display = 'none';
+      imgNodeEl.src = '';
+    }
+  });
+
+  document.querySelectorAll('script').forEach(async (scriptNodeEl) => {
+    if (scriptNodeEl.src.includes('katex')) {
+      scriptNodeEl.parentNode.removeChild(scriptNodeEl);
+    }
+  });
 
   // replace local css links with inline css
   /*
