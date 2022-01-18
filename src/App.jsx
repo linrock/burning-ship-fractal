@@ -1,10 +1,4 @@
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
-import { shadesOfPurple } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-
 import { FractalCanvas } from './FractalCanvas';
-
-SyntaxHighlighter.registerLanguage('javascript', js);
 
 // hack to prevent react hydrate from overwriting pre-rendered katex equations
 const Equation = ({ tex }) => <div className="equation" dangerouslySetInnerHTML={
@@ -178,7 +172,7 @@ const App = () => <>
       point a color by calculating the number of iterations it takes
       for the series to diverge, and the distance from zero when escaping.
     </p>
-    <SyntaxHighlighter language="javascript" style={shadesOfPurple}>{`
+    <code dangerouslySetInnerHTML={{ __html: `
 const ESCAPE_THRESHOLD = 4;
 const MAX_ITERATIONS = 255;
 
@@ -195,7 +189,7 @@ function iterateUntilEscape(x0, y0) {
   }
   return [numIterations, x*x + y*y];
 }
-`.trim()}</SyntaxHighlighter>
+`.trim()}}></code>
   </div>
 
   <div className="container">
@@ -204,7 +198,7 @@ function iterateUntilEscape(x0, y0) {
       on the number of iterations. Here's an example of a fiery yellow/red
       color palette by scaling just the green and alpha values.
     </p>
-    <SyntaxHighlighter language="javascript" style={shadesOfPurple}>{`
+    <code dangerouslySetInnerHTML={{ __html: `
 function getColor(numIterations) {
   return [
     255,                // red
@@ -213,7 +207,7 @@ function getColor(numIterations) {
     numIterations * 15  // alpha
   ];
 }
-`.trim()}</SyntaxHighlighter>
+`.trim()}}></code>
     <p>
       Here's the largest ship colored based on
       number of iterations alone.
