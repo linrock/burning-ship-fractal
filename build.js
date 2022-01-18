@@ -49,6 +49,8 @@ if (!fs.existsSync(OUT_DIR)) {
   document.querySelectorAll('script').forEach(async (scriptNodeEl) => {
     if (scriptNodeEl.src.includes('katex')) {
       scriptNodeEl.parentNode.removeChild(scriptNodeEl);
+    } else if (scriptNodeEl.src.includes('highlight.js')) {
+      scriptNodeEl.parentNode.removeChild(scriptNodeEl);
     }
   });
 
