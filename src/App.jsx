@@ -20,50 +20,12 @@ const App = () => <>
 
   <div className="container">
     <p>
-      We can visualize the behavior of points on the complex plane in this series:
+      If we visualize the escape times for various points in this complex plane series,
+      we end up in a distorted world with an armada of burning ships.
     </p>
     <div className="equation">
-      <span className="series-num series-num-wide">z<sub>n+1</sub></span>
-      <span className="series-eq">=</span>
-      (|Re(
-        <span className="series-num">z<sub>n</sub></span>
-      )|
-      <span className="series-plus">+</span>
-      i|Im(
-        <span className="series-num">z<sub>n</sub></span>
-      )|)
-      <span className="series-super">
-        <super style={{ left: '0.1rem' }}>2</super>
-      </span>
-      <span className="series-plus"
-            style={{ paddingLeft: '1.5rem' }}>+</span>
-      c
+      {`z_{n+1} = (|Re(z_n)| + |Im(z_n)|)^2 + c`}
     </div>
-
-    <p>By looking at it the same way as Mandelbrot sets:</p>
-    <div className="equation">
-      <span className="series-num series-num-wide">z<sub>n+1</sub></span>
-      <span className="series-eq">=</span>
-      <span className="series-num">z<sub>n</sub><super>2</super></span>
-      <span className="series-plus">+</span>
-      c
-    </div>
-    <section>
-      <p>
-        We can explore fractals by putting different starting (x0, y0) numbers
-        into the equation and making note of whether the series:
-      </p>
-      <ul>
-        <li>diverges to infinity or stays within a limit</li>
-        <li>if the series diverges, we make note of:
-          <ul>
-            <li>the number of iterations until reaching the escape radius</li>
-            <li>the distance from zero (0, 0) during the escape</li>
-          </ul>
-        </li>
-      </ul>
-    </section>
-
     <p>
       The largest ship is located on the real axis at -1.75.
     </p>
@@ -165,6 +127,54 @@ const App = () => <>
       yRange={[-0.0095,  0.002]}
       colorFunc={({ mu }) => [ 255, mu * 8, 0, mu * 20 ]}
     />
+  </div>
+
+  <div className="container">
+    <h3>Burning ship fractal equation</h3>
+
+    <p>The equation using complex numbers is this:</p>
+    <div className="equation">
+      {`z_{n+1} = (|Re(z_n)| + i|Im(z_n)|)^2 + c`}
+    </div>
+
+    <p>It's similar to the Mandelbrot equation:</p>
+    <div className="equation">
+      {`z_{n+1} = z_n^2 + c`}
+    </div>
+    <p>
+      Except instead of squaring each number, we add the absolute values of the
+      real and imaginary components together, and square the sum instead.
+    </p>
+
+    <p>z is a complex number composed of real and imaginary numbers:</p>
+    <div className="equation">
+      {`z = x + iy, \\quad{i = \\sqrt{-1}}`}
+    </div>
+
+    <p>If we convert to using x and y, the burning ship fractal equation reduces to::</p>
+    <div className="equation">
+      {`x_{n+1} = x_n^2 - y_n^2 + x_0`}
+    </div>
+
+    <div className="equation">
+      {`y_{n+1} = 2|x_ny_n| + y_0`}
+    </div>
+
+    <section>
+      <p>
+        We can explore fractals by putting different starting (x0, y0) numbers
+        into the equation and making note of whether the series:
+      </p>
+      <ul>
+        <li>diverges to infinity or stays within a limit</li>
+        <li>if the series diverges, we make note of:
+          <ul>
+            <li>the number of iterations until reaching the escape radius</li>
+            <li>the distance from zero (0, 0) during the escape</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
   </div>
 
   <div className="container">
