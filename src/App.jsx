@@ -6,6 +6,11 @@ import { FractalCanvas } from './FractalCanvas';
 
 SyntaxHighlighter.registerLanguage('javascript', js);
 
+// hack to prevent react hydrate from overwriting pre-rendered katex equations
+const Equation = ({ katex }) => <div className="equation" dangerouslySetInnerHTML={
+  {__html: katex }
+}></div>
+
 const App = () => <>
   <header>
     <h1>Burning ship fractal</h1>
@@ -23,9 +28,8 @@ const App = () => <>
       If we visualize the escape times for various points in this complex plane series,
       we end up in a distorted world with an armada of burning ships.
     </p>
-    <div className="equation">
-      {`z_{n+1} = (|Re(z_n)| + |Im(z_n)|)^2 + c`}
-    </div>
+    <Equation katex="z_{n+1} = (|Re(z_n)| + |Im(z_n)|)^2 + c" />
+
     <p>
       The largest ship is located on the real axis at -1.75.
     </p>
@@ -133,32 +137,21 @@ const App = () => <>
     <h3>Burning ship fractal equation</h3>
 
     <p>The equation using complex numbers is this:</p>
-    <div className="equation">
-      {`z_{n+1} = (|Re(z_n)| + i|Im(z_n)|)^2 + c`}
-    </div>
+    <Equation katex="z_{n+1} = (|Re(z_n)| + i|Im(z_n)|)^2 + c" />
 
     <p>It's similar to the Mandelbrot equation:</p>
-    <div className="equation">
-      {`z_{n+1} = z_n^2 + c`}
-    </div>
+    <Equation katex="z_{n+1} = z_n^2 + c" />
     <p>
       Except instead of squaring each number, we add the absolute values of the
       real and imaginary components together, and square the sum instead.
     </p>
 
     <p>z is a complex number composed of real and imaginary numbers:</p>
-    <div className="equation">
-      {`z = x + iy, \\quad{i = \\sqrt{-1}}`}
-    </div>
+    <Equation katex="z = x + iy, \quad{i = \sqrt{-1}}" />
 
     <p>If we convert to using x and y, the burning ship fractal equation reduces to::</p>
-    <div className="equation">
-      {`x_{n+1} = x_n^2 - y_n^2 + x_0`}
-    </div>
-
-    <div className="equation">
-      {`y_{n+1} = 2|x_ny_n| + y_0`}
-    </div>
+    <Equation katex="x_{n+1} = x_n^2 - y_n^2 + x_0" />
+    <Equation katex="y_{n+1} = 2|x_ny_n| + y_0" />
 
     <section>
       <p>

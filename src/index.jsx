@@ -37,5 +37,6 @@ ReactDOM.hydrate(
 );
 renderVisibleFractalCanvasesForever();
 [...document.querySelectorAll('.equation')].forEach((equationEl) => {
+  console.log('katex render');
   window.katex.render(equationEl.innerHTML, equationEl);
 });
