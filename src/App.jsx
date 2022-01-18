@@ -7,9 +7,9 @@ import { FractalCanvas } from './FractalCanvas';
 SyntaxHighlighter.registerLanguage('javascript', js);
 
 const App = () => <>
-  <header className="App-header">
+  <header>
     <h1>Burning ship fractal</h1>
-    <FractalCanvas id="bsf-wide"
+    <FractalCanvas
       width={4000}
       height={1000}
       xRange={[-1.95, -1.45]}
@@ -29,7 +29,7 @@ const App = () => <>
     <p>
       The largest ship is located on the real axis at -1.75.
     </p>
-    <FractalCanvas id="bsf-wide-2"
+    <FractalCanvas
       width={1600}
       height={1600}
       xRange={[-1.8, -1.7]}
@@ -42,7 +42,7 @@ const App = () => <>
       If we consider an escape radius of 2, the world also has a radius
       of 2, since any points starting outside of the world diverge right away.
     </p>
-    <FractalCanvas id="bsf-world-overview"
+    <FractalCanvas
       width={800}
       height={800}
       xRange={[-2.2, 2.2]}
@@ -54,7 +54,7 @@ const App = () => <>
       The ships are located near the real axis (y = 0) among negative
       real numbers.
     </p>
-    <FractalCanvas id="bsf-world-overview"
+    <FractalCanvas
       width={800}
       height={400}
       xRange={[-2.5, 0.5]}
@@ -63,7 +63,7 @@ const App = () => <>
     />
 
     <p>Zooming in closer to the ships in the bottom left</p>
-    <FractalCanvas id="bsf-world-ships"
+    <FractalCanvas
       width={800}
       height={600}
       xRange={[-1.81, -1.39]}
@@ -72,7 +72,7 @@ const App = () => <>
     />
 
     <p>The ship near -1.6 between the largest ship and the dark expanse.</p>
-    <FractalCanvas id="bsf-world-16"
+    <FractalCanvas
       width={800}
       height={800}
       xRange={[-1.65, -1.58]}
@@ -111,7 +111,7 @@ const App = () => <>
       Behind the largest ship are some very small ships. The light ends
       at (-2, 0)
     </p>
-    <FractalCanvas id="bsf-world-back"
+    <FractalCanvas
       width={800}
       height={600}
       xRange={[-2.04, -1.66]}
@@ -225,7 +225,7 @@ function getColor(numIterations) {
       Here's the largest ship colored based on
       number of iterations alone.
     </p>
-    <FractalCanvas id="bsf-wide"
+    <FractalCanvas
       width={1600}
       height={1600}
       xRange={[-1.8, -1.7]}
@@ -254,7 +254,7 @@ function getColor(mu) {
     <p>
       Here's the same image as above colored with renormalized iteration counts.
     </p>
-    <FractalCanvas id="bsf-wide-2"
+    <FractalCanvas
       width={1600}
       height={1600}
       xRange={[-1.8, -1.7]}
