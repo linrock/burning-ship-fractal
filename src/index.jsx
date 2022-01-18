@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import 'highlight.js/styles/shades-of-purple.css';
 import './style.css';
+
 import App from './App';
 
 const VIZ_POLL_INTERVAL_MS = 200;
@@ -41,5 +43,11 @@ if (window.katex) {
   [...document.querySelectorAll('.equation')].forEach((equationEl) => {
     console.log('rendering katex equation');
     window.katex.render(equationEl.innerHTML, equationEl);
+  });
+}
+// hljs is not included in pre-rendered production builds
+if (window.hljs) {
+  document.querySelectorAll('pre code').forEach((el) => {
+    window.hljs.highlightElement(el);
   });
 }

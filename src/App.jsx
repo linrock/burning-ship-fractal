@@ -229,7 +229,8 @@ function getColor(numIterations) {
       By considering escape distances on a logarithmic scale, we
       can use this extra information to smooth the color transitions.
     </p>
-    <SyntaxHighlighter language="javascript" style={shadesOfPurple}>{`
+    <pre>
+      <code dangerouslySetInnerHTML={{ __html: `
 const ESCAPE_RADIUS = 2;
 
 function getMu(numIterations, escapeDistance) {
@@ -240,7 +241,8 @@ function getMu(numIterations, escapeDistance) {
 function getColor(mu) {
   return [ 255, mu * 7, 0, mu * 15 ];
 }
-`.trim()}</SyntaxHighlighter>
+`.trim()}}></code>
+    </pre>
     <p>
       Here's the same image as above colored with renormalized iteration counts.
     </p>
