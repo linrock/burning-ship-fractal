@@ -36,7 +36,10 @@ ReactDOM.hydrate(
   document.getElementById('react-mount')
 );
 renderVisibleFractalCanvasesForever();
-[...document.querySelectorAll('.equation')].forEach((equationEl) => {
-  console.log('katex render');
-  window.katex.render(equationEl.innerHTML, equationEl);
-});
+// katex is not included in pre-rendered production builds
+if (window.katex) {
+  [...document.querySelectorAll('.equation')].forEach((equationEl) => {
+    console.log('rendering katex equation');
+    window.katex.render(equationEl.innerHTML, equationEl);
+  });
+}
