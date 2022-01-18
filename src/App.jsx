@@ -5,6 +5,10 @@ const Equation = ({ tex }) => <div className="equation" dangerouslySetInnerHTML=
   {__html: tex }
 }></div>
 
+const CodeBlock = ({ code }) => <pre>
+  <code dangerouslySetInnerHTML={{ __html: code.trim() }}></code>
+</pre>;
+
 const App = () => <>
   <header>
     <h1>Burning ship fractal</h1>
@@ -172,7 +176,7 @@ const App = () => <>
       point a color by calculating the number of iterations it takes
       for the series to diverge, and the distance from zero when escaping.
     </p>
-    <code dangerouslySetInnerHTML={{ __html: `
+    <CodeBlock code={`
 const ESCAPE_THRESHOLD = 4;
 const MAX_ITERATIONS = 255;
 
@@ -189,7 +193,7 @@ function iterateUntilEscape(x0, y0) {
   }
   return [numIterations, x*x + y*y];
 }
-`.trim()}}></code>
+`}/>
   </div>
 
   <div className="container">
@@ -198,7 +202,7 @@ function iterateUntilEscape(x0, y0) {
       on the number of iterations. Here's an example of a fiery yellow/red
       color palette by scaling just the green and alpha values.
     </p>
-    <code dangerouslySetInnerHTML={{ __html: `
+    <CodeBlock code={`
 function getColor(numIterations) {
   return [
     255,                // red
@@ -207,7 +211,7 @@ function getColor(numIterations) {
     numIterations * 15  // alpha
   ];
 }
-`.trim()}}></code>
+`}/>
     <p>
       Here's the largest ship colored based on
       number of iterations alone.
@@ -223,8 +227,7 @@ function getColor(numIterations) {
       By considering escape distances on a logarithmic scale, we
       can use this extra information to smooth the color transitions.
     </p>
-    <pre>
-      <code dangerouslySetInnerHTML={{ __html: `
+    <CodeBlock code={`
 const ESCAPE_RADIUS = 2;
 
 function getMu(numIterations, escapeDistance) {
@@ -235,8 +238,7 @@ function getMu(numIterations, escapeDistance) {
 function getColor(mu) {
   return [ 255, mu * 7, 0, mu * 15 ];
 }
-`.trim()}}></code>
-    </pre>
+`}/>
     <p>
       Here's the same image as above colored with renormalized iteration counts.
     </p>

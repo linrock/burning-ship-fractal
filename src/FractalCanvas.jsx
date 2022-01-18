@@ -66,7 +66,7 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
     const renderListener = () => {
       canvasEl.removeEventListener('render', renderListener);
       if (!isRendered) {
-        console.log('not rendered yet! rendering...');
+        console.log('canvas not rendered yet! rendering...');
         // render the full-quality canvas
         requestAnimationFrame(() => {
           drawBurningShipFractal(canvasEl, xRange, yRange, colorFunc);

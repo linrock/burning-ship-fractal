@@ -45,9 +45,10 @@ if (window.katex) {
     window.katex.render(equationEl.innerHTML, equationEl);
   });
 }
-// hljs is not included in pre-rendered production builds
 if (window.hljs) {
+  // hljs is not included in pre-rendered production builds
   document.querySelectorAll('pre code').forEach((el) => {
+    console.log('highlighting code block');
     window.hljs.highlightElement(el);
   });
 }
