@@ -7,8 +7,8 @@ import { FractalCanvas } from './FractalCanvas';
 SyntaxHighlighter.registerLanguage('javascript', js);
 
 // hack to prevent react hydrate from overwriting pre-rendered katex equations
-const Equation = ({ katex }) => <div className="equation" dangerouslySetInnerHTML={
-  {__html: katex }
+const Equation = ({ tex }) => <div className="equation" dangerouslySetInnerHTML={
+  {__html: tex }
 }></div>
 
 const App = () => <>
@@ -25,10 +25,10 @@ const App = () => <>
 
   <div className="container">
     <p>
-      If we visualize the escape times for various points in this complex plane series,
-      we end up in a distorted world with an armada of burning ships.
+      If we plot the escape times for points in this complex plane series,
+      we end up in a world of burning ships.
     </p>
-    <Equation katex="z_{n+1} = (|Re(z_n)| + |Im(z_n)|)^2 + c" />
+    <Equation tex="z_{n+1} = (|Re(z_n)| + |Im(z_n)|)^2 + c" />
 
     <p>
       The largest ship is located on the real axis at -1.75.
@@ -137,26 +137,26 @@ const App = () => <>
     <h3>Burning ship fractal equation</h3>
 
     <p>The equation using complex numbers is this:</p>
-    <Equation katex="z_{n+1} = (|Re(z_n)| + i|Im(z_n)|)^2 + c" />
+    <Equation tex="z_{n+1} = (|Re(z_n)| + i|Im(z_n)|)^2 + c" />
 
     <p>It's similar to the Mandelbrot equation:</p>
-    <Equation katex="z_{n+1} = z_n^2 + c" />
+    <Equation tex="z_{n+1} = z_n^2 + c" />
     <p>
       Except instead of squaring each number, we add the absolute values of the
       real and imaginary components together, and square the sum instead.
     </p>
 
     <p>z is a complex number composed of real and imaginary numbers:</p>
-    <Equation katex="z = x + iy, \quad{i = \sqrt{-1}}" />
+    <Equation tex="z = x + iy, \quad{i = \sqrt{-1}}" />
 
     <p>If we convert to using x and y, the burning ship fractal equation reduces to::</p>
-    <Equation katex="x_{n+1} = x_n^2 - y_n^2 + x_0" />
-    <Equation katex="y_{n+1} = 2|x_ny_n| + y_0" />
+    <Equation tex="x_{n+1} = x_n^2 - y_n^2 + x_0" />
+    <Equation tex="y_{n+1} = 2|x_ny_n| + y_0" />
 
     <section>
       <p>
-        We can explore fractals by putting different starting (x0, y0) numbers
-        into the equation and making note of whether the series:
+        One way of exploring fractals is by putting different starting (x0, y0)
+        numbers into the equation and making note of whether the series:
       </p>
       <ul>
         <li>diverges to infinity or stays within a limit</li>
@@ -200,7 +200,7 @@ function iterateUntilEscape(x0, y0) {
 
   <div className="container">
     <p>
-      We can set the RGBA colors of every pixel in the image based
+      We'll set the RGBA colors of every pixel in the image based
       on the number of iterations. Here's an example of a fiery yellow/red
       color palette by scaling just the green and alpha values.
     </p>
@@ -234,10 +234,7 @@ const ESCAPE_RADIUS = 2;
 
 function getMu(numIterations, escapeDistance) {
   return numIterations + 1 -
-    Math.log(
-      Math.log(escapeDistance)) /
-      Math.log(ESCAPE_RADIUS)
-    );
+    Math.log(escapeDistance) / Math.log(ESCAPE_RADIUS);
 }
 
 function getColor(mu) {
