@@ -33,7 +33,7 @@ ReactDOM.hydrate(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('react-mount')
 );
 renderVisibleFractalCanvasesForever();
 [...document.querySelectorAll('.equation')].forEach((equationEl) => {
