@@ -143,6 +143,10 @@ export function FractalCanvas({ width, height, xRange: xRangeInit, yRange: yRang
           setMousePosY(null);
         }}
         onWheel={(event) => {
+          if (!event.shiftKey) {
+            // only zoom if shift is held down
+            return;
+          }
           // console.log(`wheel! ${event.deltaY}`);
           const wheelDirection = event.deltaY > 0 ? 1 : -1;
           const xRangeStep = (xRange[1] - xRange[0]) / 10 * wheelDirection;
