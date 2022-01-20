@@ -214,6 +214,41 @@ function getColor(numIterations) {
   ];
 }
 `}/>
+
+    <p>
+      Here's a general function for drawing fractals onto canvas elements.
+      Changing the iterateUntilEscape function will change the drawn fractal.
+    </p>
+
+    <CodeBlock code={`
+function drawFractal(canvasEl, xRange, yRange, getColor) {
+  const canvasWidth = canvasEl.width;
+  const canvasHeight = canvasEl.height;
+  const context = canvasEl.getContext('2d');
+  const canvasImageData =
+    context.createImageData(canvasWidth, canvasHeight);
+  const image = canvasImageData.data;
+  for (let i = 0; i < canvasHeight; i++) {
+    for (let j = 0; j < canvasWidth; j++) {
+      const x0 = xRange[0] +
+        j*(xRange[1] - xRange[0]) / canvasWidth;
+      const y0 = yRange[0] +
+        i*(yRange[1] - yRange[0]) / canvasHeight;
+      const [numIterations, escapeDistance] =
+        iterateUntilEscape(x0, y0);
+      const pixelIndex = 4*i*canvasWidth + 4*j;
+      if (numIterations !== MAX_ITERATIONS) {
+        const mu = getMu(numIterations, escapeDistance);
+        const pixels = getColor({ numIterations, mu });
+        for (let p = 0; p < 4; p++) {
+          image[pixelIndex + p] = pixels[p];
+        }
+      }
+    }
+  }
+  context.putImageData(canvasImageData, 0, 0);
+}`}/>
+
     <p>
       Here's the largest ship colored based on
       number of iterations alone.
