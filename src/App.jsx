@@ -26,8 +26,7 @@ const App = () => <>
       If we plot the escape times for points in this complex plane series,
       we end up in a world of burning ships.
     </p>
-    <Equation tex="z_{n+1} = (|Re(z_n)| + |Im(z_n)|)^2 + c" />
-
+    <Equation tex="z_{n+1} = (|Re(z_n)| + i|Im(z_n)|)^2 + c, \quad{i = \sqrt{-1}}" />
     <p>
       The largest ship is located on the real axis at -1.75.
     </p>

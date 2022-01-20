@@ -35,15 +35,15 @@ export function drawBurningShipFractal(canvasEl, xRange, yRange, colorFunc) {
   const image = canvasImageData.data;
   for (let i = 0; i < canvasHeight; i++) {
     for (let j = 0; j < canvasWidth; j++) {
-      const x0 = xRange[0] + j * (xRange[1] - xRange[0]) / canvasWidth;
-      const y0 = yRange[0] + i * (yRange[1] - yRange[0]) / canvasHeight;
+      const x0 = xRange[0] + j*(xRange[1] - xRange[0]) / canvasWidth;
+      const y0 = yRange[0] + i*(yRange[1] - yRange[0]) / canvasHeight;
       const [numIterations, escapeDistance] = iterateUntilEscape(x0, y0);
-      const ind = i * canvasWidth * 4 + j * 4;
+      const pixelIndex = 4*i*canvasWidth + 4*j;
       if (numIterations !== MAX_ITERATIONS) {
         const mu = getMu(numIterations, escapeDistance);
         const pixels = colorFunc({ numIterations, mu });
         for (let p = 0; p < 4; p++) {
-          image[ind + p] = pixels[p];
+          image[pixelIndex + p] = pixels[p];
         }
       }
     }
