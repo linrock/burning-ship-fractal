@@ -147,4 +147,7 @@ footer {
     width: 100%;
     overflow-x: auto;
   }
+  .equation {
+    font-size: 0.8rem;
+  }
 }
