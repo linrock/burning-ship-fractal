@@ -6,7 +6,8 @@ const Equation = ({ tex }) => <div className="equation" dangerouslySetInnerHTML=
 }></div>
 
 const CodeBlock = ({ code }) => <pre>
-  <code dangerouslySetInnerHTML={{ __html: code.trim() }}></code>
+  <code class="language-javascript"
+        dangerouslySetInnerHTML={{ __html: code.trim() }}></code>
 </pre>;
 
 const App = () => <>
@@ -81,7 +82,7 @@ const App = () => <>
       colorFunc={({ mu }) => [ 255, mu * 7, 0, mu * 15 ]}
     />
 
-    <p>Small ships near the edge</p>
+    <p>Small ships near the edge of darkness</p>
     <FractalCanvas
       width={800}
       height={400}
@@ -99,7 +100,7 @@ const App = () => <>
       colorFunc={({ mu }) => [ 255, mu * 6, 0, mu * 15 ]}
     />
 
-    <p>Small ship and disorder near the expanse.</p>
+    <p>Small ship and disorder near the expanse, with curving spires.</p>
     <FractalCanvas
       width={1600}
       height={1600}
@@ -109,7 +110,7 @@ const App = () => <>
     />
 
     <p>
-      Behind the largest ship are some very small ships. The light ends
+      Left of the largest ship are some very small ships. The light ends
       at (-2, 0)
     </p>
     <FractalCanvas
@@ -140,7 +141,8 @@ const App = () => <>
     <Equation tex="z_{n+1} = z_n^2 + c" />
     <p>
       Except instead of squaring each number, we add the absolute values of the
-      real and imaginary components together, and square the sum instead.
+      real and imaginary components together during each iteration and square
+      the sum instead.
     </p>
 
     <p>z is a complex number composed of real and imaginary numbers:</p>
@@ -155,7 +157,7 @@ const App = () => <>
 
     <section>
       <p>
-        One way of exploring fractals is by putting different starting (x0, y0)
+        A common way of exploring fractals is by putting different starting (x0, y0)
         numbers into the equation and making note of whether the series:
       </p>
       <ul>
@@ -247,7 +249,8 @@ function drawFractal(canvasEl, xRange, yRange, getColor) {
     }
   }
   context.putImageData(canvasImageData, 0, 0);
-}`}/>
+}`
+}/>
 
     <p>
       Here's the largest ship colored based on
