@@ -1,9 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const { JSDOM } = require('jsdom');
-const beautify = require('js-beautify').html;
-const puppeteer = require('puppeteer');
+const { getRenderedDomFromUrl, Snapshot } = require('snapshot-url');
 
 const OUT_DIR = './build';                     // output dir, relative to this file
 const HTML_INFILE = './build/index.html';      // output of `yarn build`
@@ -16,24 +14,10 @@ if (!fs.existsSync(OUT_DIR)) {
 // fs.copyFileSync(`./public/favicon.ico`, `${OUT_DIR}/favicon.ico`);
 
 (async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
   const url = `file://${path.resolve('./build/index.html')}`;
-  try {
-    await page.goto(url, {
-      waitUntil: 'networkidle2',
-      timeout: 10_000,
-    });
-  } catch (error) {
-    console.dir(error);
-    console.error(`Error: failed to snapshot url: ${url}`);
-    await browser.close();
-    return;
-  }
-  // get the html after rendering all JS templates
-  let finalHtml = `<!DOCTYPE html><html>${await page.evaluate(() => document.documentElement.innerHTML)}</html>`;
+  const snapshot = new Snapshot(url);
+  const dom = await snapshot.renderDOM();
 
-  const dom = new JSDOM(finalHtml);
   const document = dom.window.document;
   // make the first 3 images visible on the page.
   // delete the data in the rest of the pre-rendered images.
@@ -74,8 +58,7 @@ if (!fs.existsSync(OUT_DIR)) {
     });
   */
 
-  finalHtml = dom.serialize();
-  finalHtml = beautify(finalHtml, { indent_size: 2 });
+  const finalHtml = snapshot.getHtml({ prettyPrint: true });
 
   // write the final html to a file
   fs.open(HTML_OUTFILE, 'w', (err) => {
@@ -88,8 +71,6 @@ if (!fs.existsSync(OUT_DIR)) {
       } else {
         console.log(`Saved static html to ${OUT_DIR}/index.html (size: ${finalHtml.length})`);
       }
-      // exit now that we're done
-      await browser.close();
     });
   });
 })();
