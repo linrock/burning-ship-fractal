@@ -1,12 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const { getRenderedDomFromUrl, Snapshot } = require('snapshot-url');
+const { Snapshot } = require('snapshot-url');
 
 const OUT_DIR = './build';                     // output dir, relative to this file
-const HTML_INFILE = './build/index.html';      // output of `yarn build`
 const HTML_OUTFILE = './build/index.html';     // output html file, pretty-printed + cleaned
-const STYLE_NODES = 'link[rel="stylesheet"]';  // replace with inline CSS
 
 if (!fs.existsSync(OUT_DIR)) {
   fs.mkdirSync(OUT_DIR);
@@ -40,6 +38,7 @@ if (!fs.existsSync(OUT_DIR)) {
 
   // replace local css links with inline css
   /*
+  const STYLE_NODES = 'link[rel="stylesheet"]';
   dom.window.document.
     querySelectorAll(STYLE_NODES).
     forEach(async (cssNodeEl) => {
