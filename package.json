@@ -39,6 +39,6 @@
     ]
   },
   "devDependencies": {
-    "snapshot-url": "^0.0.4"
+    "snapshot-url": "^0.0.5"
   }
 }
