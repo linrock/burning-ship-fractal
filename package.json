@@ -39,9 +39,6 @@
     ]
   },
   "devDependencies": {
-    "js-beautify": "^1.14.0",
-    "jsdom": "^19.0.0",
-    "puppeteer": "^13.0.1",
     "snapshot-url": "^0.0.4"
   }
 }
