@@ -14,6 +14,15 @@ Fractal image controls:
 * click and drag to pan the view
 
 
+## Development
+
+Start the dev server with: `yarn start`
+Then visit: `localhost:3000`
+
+For production builds: `yarn build`
+Then: `open build/index.html`
+
+
 ### License
 
 MIT
