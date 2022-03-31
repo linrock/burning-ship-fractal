@@ -1,5 +1,7 @@
 # Burning ship fractal
 
+![bsf-render-pngcrush](https://user-images.githubusercontent.com/208617/161083486-0d2e8734-5ad8-4975-809e-0efbcc6876dc.png)
+
 Work in progress:
 https://robotmoon.com/burning-ship-fractal/
 
